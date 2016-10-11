@@ -42,8 +42,9 @@ public class ProductController : MonoBehaviour {
 			form.AddField ("add-to-cart", 472);
 			//StartCoroutine (WaitForRequest (www));
 			//addToCart ();*/
-		} else if (Input.GetMouseButtonDown (0) && Vector3.Distance (transform.position, player.transform.position) <= 3) {
+		} else if (Input.GetMouseButtonDown (1) && Vector3.Distance (transform.position, player.transform.position) <= 3) {
 			cart.removeFromCart (product_id);
+			Debug.Log ("Item removed");
 		}
 	}
 

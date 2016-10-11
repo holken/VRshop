@@ -30,4 +30,8 @@ public class CartController : MonoBehaviour {
 		return cart [productId];
 	}
 
+	public Dictionary<string, int> getCart(){
+		return cart;
+	}
+
 }

@@ -1,10 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ProductController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="assets\Scripts\Checkout.cs">
     <Files>
-      <File FileName="Assets\Scripts\ProductController.cs" Line="35" Column="14" />
+      <File FileName="Assets\Scripts\ProductController.cs" Line="11" Column="27" />
       <File FileName="assets\Scripts\PlayerController.cs" Line="9" Column="26" />
-      <File FileName="assets\CartController.cs" Line="26" Column="26" />
+      <File FileName="assets\Scripts\Checkout.cs" Line="11" Column="3" />
+      <File FileName="assets\Scripts\CartController.cs" Line="2" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
