@@ -1,0 +1,25 @@
+In unity:
+1. Make shop in 3D
+2. Make it so you can lift things with vive
+3. Make it so you can drop things in the cart so it is added to "the cart"
+4. Create cart and make it stay in front of user
+5. Extra easter eggs
+6. Make display that shows how much the total cost (on the cart? And add all products there too?)
+7. Eventually, add some sort of thing for payment?
+8. Find and create a way to remove things from the cart
+
+extra stuff:
+1. Make the products stay in the cart by making them stuck in the cart
+2. Do some fancy optimization algorithm for the cart to fit more?
+3. A machine or something you can place products in to show more descriptions? Or Augmented reality thingy when you pick up?
+
+
+PHP *Go as far as you can down the line*
+1. Put everything in cart
+2. Put in payment method and delivery stuff
+3. Draw points/money
+4. Make payment
+
+Design
+1. Find old report and send to Daniel
+2. Check old report from design and make plan how to fit in the interaction design into the whole project

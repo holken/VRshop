@@ -1,0 +1,15 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="assets\Scripts\CartController.cs">
+    <Files>
+      <File FileName="assets\Scripts\ProductController.cs" Line="32" Column="38" />
+      <File FileName="assets\Scripts\Checkout.cs" Line="19" Column="45" />
+      <File FileName="assets\Scripts\CartController.cs" Line="20" Column="31" />
+      <File FileName="assets\Products.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
