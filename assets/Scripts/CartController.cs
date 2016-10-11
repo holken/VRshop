@@ -4,34 +4,47 @@ using System.Collections;
 
 public class CartController : MonoBehaviour {
 	public string url;
-	Dictionary<string, int> cart;	
+	Dictionary<string, Products> cart;	
 	// Use this for initialization
 	void Start () {
-		cart = new Dictionary<string, int>();
+		cart = new Dictionary<string, Products>();
 	}
 	
-	public void addToCart(string productId, int quantity){
-
+	public void addToCart(string productId, int quantity, double price){
+		
 		if (!cart.ContainsKey(productId)) {
-			cart.Add (productId, quantity);
+			Products temp = new Products ();
+			temp.setProductId(productId);
+			temp.setQuantity(quantity);
+			temp.setPrice(price);
+			cart.Add (productId, temp);
 		} else {
-			int value = cart [productId];
-			cart.Remove (productId);
-			cart.Add (productId, value + quantity);
+			cart[productId].setQuantity(quantity);
+			cart[productId].setPrice(price);
+
 
 		}
+
+		Debug.Log("the price: " + calculatePrice ());
 	}
 
 	public void removeFromCart(string productId){
 		cart.Remove (productId);
 	}
 
-	public int getItem(string productId){
-		return cart [productId];
+	public int getQuantity(string productId){
+		return cart [productId].getQuantity ();
 	}
 
-	public Dictionary<string, int> getCart(){
+	public Dictionary<string, Products> getCart(){
 		return cart;
 	}
 
+	public double calculatePrice(){
+		double cost = 0;
+		foreach (KeyValuePair<string, Products> item in cart) {
+			cost += item.Value.getPrice ();
+		}
+		return cost;
+	}
 }

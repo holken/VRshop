@@ -10,9 +10,9 @@ public class ProductController : MonoBehaviour {
 	public string public_sku;
 	public string product_id;
 	public int quantity;
+	public double price;
 	public GameObject player;
 	public CartController cart;
-	public string url;
 
 	// Use this for initialization
 	void Start () {
@@ -27,9 +27,9 @@ public class ProductController : MonoBehaviour {
 	void OnMouseOver() {
 		if (Input.GetMouseButtonDown (0) && Vector3.Distance (transform.position, player.transform.position) <= 3) {
 
-			cart.addToCart (product_id, quantity);
-			int fish = cart.getItem (product_id);
-			Debug.Log ("Number of items in cart: " + fish);
+			cart.addToCart (product_id, quantity, price);
+			int quant = cart.getQuantity(product_id);
+			Debug.Log ("Number of items of " + product_id + " in cart: " + quant);
 			
 
 			//obsolete

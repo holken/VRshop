@@ -12,11 +12,12 @@ public class Checkout : MonoBehaviour {
 
 	private void makePurchase(){
 		
-		Dictionary<string, int> checkoutCart = cart.getCart();
+		Dictionary<string, Products> checkoutCart = cart.getCart();
 		string urlAddition = "?";
 		int count = 1;
-		foreach (KeyValuePair<string, int> item in checkoutCart) {
-			urlAddition += "product" + count + "=" + item.Key + "&";
+		foreach (KeyValuePair<string, Products> item in checkoutCart) {
+			int quantity = item.Value.getQuantity ();;
+			urlAddition += "product" + count + "=" + item.Key + "&productQ" + count + "=" + quantity + "&";
 			count++;
 		}
 		urlAddition = urlAddition.Remove (urlAddition.Length - 1);
