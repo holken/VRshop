@@ -48,6 +48,21 @@ public class ProductController : MonoBehaviour {
 		}
 	}
 
+    public string getProductID()
+    {
+        return product_id;
+
+    }
+
+    public int getQuantity()
+    {
+        return quantity;
+    }
+
+    public double getPrice()
+    {
+        return price;
+    }
 //	IEnumerator addToCart(){
 //		UnityWebRequest www = UnityWebRequest.Get ("http://fiskeapp.se/produkt-kategori/orter-bar-och-froer/?add-to-cart=472");
 //

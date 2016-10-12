@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 
 public class CartController : MonoBehaviour {
-	public string url;
+	
 	Dictionary<string, Products> cart;	
 	// Use this for initialization
 	void Start () {
@@ -47,4 +47,17 @@ public class CartController : MonoBehaviour {
 		}
 		return cost;
 	}
+
+    public void OnTriggerStay(Collider collider)
+    {
+        if (collider != null && collider.gameObject.GetComponent<ProductController>() != null)
+        {
+            if (collider.GetComponent<InteractableItem>().IsInteracting() == false)
+            {
+                ProductController product = collider.GetComponent<ProductController>();
+                addToCart(product.getProductID(), product.getQuantity(), product.getPrice());
+                Destroy(collider.gameObject);
+            }
+        }
+    }
 }

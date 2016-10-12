@@ -21,7 +21,8 @@ public class Checkout : MonoBehaviour {
 			count++;
 		}
 		urlAddition = urlAddition.Remove (urlAddition.Length - 1);
-		//to be url for script sending some sort of custom URL?
+        //to be url for script sending some sort of custom URL?
+        Debug.Log("URL : " + "https://scandinavianhemp.se/" + urlAddition);
 		Application.OpenURL("https://scandinavianhemp.se/" + urlAddition);
 	}
 
@@ -31,4 +32,11 @@ public class Checkout : MonoBehaviour {
 			makePurchase ();
 		}
 	}
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        Debug.Log("entered trigger");
+        makePurchase();
+
+    }
 }

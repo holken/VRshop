@@ -1,7 +1,7 @@
 In unity:
 1. Make shop in 3D
-2. Make it so you can lift things with vive
-3. Make it so you can drop things in the cart so it is added to "the cart"
+2. Make it so you can lift things with vive -- DONE
+3. Make it so you can drop things in the cart so it is added to "the cart" -- DONE
 4. Create cart and make it stay in front of user
 5. Extra easter eggs
 6. Make display that shows how much the total cost (on the cart? And add all products there too?)
@@ -21,5 +21,5 @@ PHP *Go as far as you can down the line*
 4. Make payment
 
 Design
-1. Find old report and send to Daniel
+1. Find old report and send to Daniel -- DONE
 2. Check old report from design and make plan how to fit in the interaction design into the whole project
