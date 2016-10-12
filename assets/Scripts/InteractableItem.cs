@@ -33,18 +33,33 @@ public class InteractableItem : MonoBehaviour
     {
         if (attachedWand && currentlyInteracting)
         {
-            posDelta = attachedWand.transform.position - interactionPoint.position;
-            this.rigidbody.velocity = posDelta * velocityFactor * Time.fixedDeltaTime;
-
-            rotationDelta = attachedWand.transform.rotation * Quaternion.Inverse(interactionPoint.rotation);
-            rotationDelta.ToAngleAxis(out angle, out axis);
-
-            if (angle > 180)
+            Debug.Log("Something was pressed");
+            if (this.GetComponent<CartController>() != null)
             {
-                angle -= 360;
-            }
+                posDelta = attachedWand.transform.position - interactionPoint.position;
+                //TO-DO add smoother movement by dragging from interactionPoint
+                this.GetComponentInParent<Transform>().position = new Vector3(attachedWand.transform.position.x, this.transform.position.y, attachedWand.transform.position.z);
+                //TO-DO add so you can rotate the shopping cart
 
-            this.rigidbody.angularVelocity = (Time.fixedDeltaTime * angle * axis) * rotationFactor;
+
+
+
+            }
+            else {
+                Debug.Log("We pressed something else");
+                posDelta = attachedWand.transform.position - interactionPoint.position;
+                this.rigidbody.velocity = posDelta * velocityFactor * Time.fixedDeltaTime;
+
+                rotationDelta = attachedWand.transform.rotation * Quaternion.Inverse(interactionPoint.rotation);
+                rotationDelta.ToAngleAxis(out angle, out axis);
+
+                if (angle > 180)
+                {
+                    angle -= 360;
+                }
+
+                this.rigidbody.angularVelocity = (Time.fixedDeltaTime * angle * axis) * rotationFactor;
+            }
         }
     }
 
@@ -62,7 +77,8 @@ public class InteractableItem : MonoBehaviour
     {
         if (wand == attachedWand)
         {
-            attachedWand = null;
+            
+                attachedWand = null;
             currentlyInteracting = false;
         }
     }
@@ -72,3 +88,4 @@ public class InteractableItem : MonoBehaviour
         return currentlyInteracting;
     }
 }
+ 

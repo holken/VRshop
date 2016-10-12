@@ -4,11 +4,25 @@ using System.Collections;
 
 public class CartController : MonoBehaviour {
 	
-	Dictionary<string, Products> cart;	
+	Dictionary<string, Products> cart;
+    public GameObject player;
+    //public GameObject thisCart;
 	// Use this for initialization
 	void Start () {
 		cart = new Dictionary<string, Products>();
-	}
+        //this.transform.position = new Vector3(this.transform.position.x, 0, this.transform.position.z);
+    }
+    
+    //this is for if we want the cart to be fastklistrad in front (if you want this then remove the InteractionItem script), otherwise comment out the update (take back the script)
+    void Update()
+    {
+        Vector3 difference = new Vector3(-0.6f, 0.0f, 0f);
+
+        this.transform.position = new Vector3(player.transform.position.x, 0, player.transform.position.z) + difference;
+        
+        //TO-DO fix rotation and probably distance at the same time
+        //this.transform.rotation = player.transform.rotation;
+    }
 	
 	public void addToCart(string productId, int quantity, double price){
 		

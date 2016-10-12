@@ -31,19 +31,21 @@ public class WandController : MonoBehaviour {
 
 
 
-
-		if (controller.GetPressDown (gripButton)) {
-			float minDistance = float.MaxValue;
+       
+        if (controller.GetPressDown (gripButton)) {
+            Debug.Log("inside getpressed");
+            float minDistance = float.MaxValue;
 			float distance;
 			foreach (InteractableItem item in objectsHoveringOver) {
+                Debug.Log("inside loop");
                 if (item == null)
                 {
-
+                    Debug.Log("item is null");
                     objectsHoveringOver.Remove(item);
                 }
                 else {
                     distance = (item.transform.position - transform.position).sqrMagnitude;
-
+                    Debug.Log("Inside where you set closestItem");
                     if (distance < minDistance)
                     {
                         minDistance = distance;
@@ -55,9 +57,11 @@ public class WandController : MonoBehaviour {
 
 			if (interactingItem) {
 				if (interactingItem.IsInteracting ()) {
+                    Debug.Log("Is interacting");
 					interactingItem.EndInteraction (this);
 				}
-				interactingItem.BeginInteraction (this);
+                Debug.Log("Right before begin interaction");
+                interactingItem.BeginInteraction (this);
 			}
 
 
@@ -71,8 +75,10 @@ public class WandController : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider collider){
 		InteractableItem collidedItem = collider.GetComponent<InteractableItem> ();
-		if (collidedItem) {
-			objectsHoveringOver.Add (collidedItem);
+        Debug.Log("trigger enter");
+        if (collidedItem) {
+            Debug.Log("adds to things that can be collided");
+            objectsHoveringOver.Add (collidedItem);
 		}
         
 	}	
@@ -80,7 +86,8 @@ public class WandController : MonoBehaviour {
 	private void OnTriggerExit(Collider collider){
 		InteractableItem collidedItem = collider.GetComponent<InteractableItem> ();
 		if (collidedItem) {
-			objectsHoveringOver.Remove(collidedItem);
+            Debug.Log("exited");
+            objectsHoveringOver.Remove(collidedItem);
 		}
 	}
 }

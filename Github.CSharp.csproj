@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="assets\InteractableCart.cs" />
     <Compile Include="assets\ProductSpawning.cs" />
     <Compile Include="assets\Scripts\CartController.cs" />
     <Compile Include="assets\Scripts\Checkout.cs" />
