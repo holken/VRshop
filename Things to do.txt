@@ -2,7 +2,7 @@ In unity:
 1. Make shop in 3D
 2. Make it so you can lift things with vive -- DONE
 3. Make it so you can drop things in the cart so it is added to "the cart" -- DONE
-4. Create cart and make it stay in front of user --Will stay in the same place relatively to the player, aka it doesn't rotate
+4. Create cart and make it stay in front of user -- DONE (You move it around, not in front of user because really annoying)
 5. Extra easter eggs
 6. Make display that shows how much the total cost (on the cart? And add all products there too?)
 7. Eventually, add some sort of thing for payment?

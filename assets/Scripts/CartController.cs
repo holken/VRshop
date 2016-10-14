@@ -16,12 +16,15 @@ public class CartController : MonoBehaviour {
     //this is for if we want the cart to be fastklistrad in front (if you want this then remove the InteractionItem script), otherwise comment out the update (take back the script)
     void Update()
     {
-        Vector3 difference = new Vector3(-0.6f, 0.0f, 0f);
+       
+        /*
+        LEGACY CODE, USED TO HAVE THE CART IN-FRONT OF THE PLAYER AT ALL TIMES (REALLY ANNOYING)
+        this.transform.position = new Vector3(player.transform.position.x + player.transform.forward.x, 0, player.transform.position.z + player.transform.forward.z);
 
-        this.transform.position = new Vector3(player.transform.position.x, 0, player.transform.position.z) + difference;
+        float yRotation = player.transform.eulerAngles.y-90;
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, yRotation, transform.eulerAngles.z);
         
-        //TO-DO fix rotation and probably distance at the same time
-        //this.transform.rotation = player.transform.rotation;
+        */
     }
 	
 	public void addToCart(string productId, int quantity, double price){

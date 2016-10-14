@@ -18,6 +18,9 @@ public class InteractableItem : MonoBehaviour
     private WandController attachedWand;
 
     private Transform interactionPoint;
+    private Vector3 cartInteractionpoint;
+    private Vector3 cartInteractionRotation;
+    
 
     // Use this for initialization
     void Start()
@@ -34,13 +37,20 @@ public class InteractableItem : MonoBehaviour
         if (attachedWand && currentlyInteracting)
         {
             Debug.Log("Something was pressed");
-            if (this.GetComponent<CartController>() != null)
+            if (this.GetComponentInParent<CartController>() != null)
             {
-                posDelta = attachedWand.transform.position - interactionPoint.position;
+               
+                    //Vector3 cartInteractionpoint = this.transform.position - attachedWand.transform.position;
+                    
                 //TO-DO add smoother movement by dragging from interactionPoint
-                this.GetComponentInParent<Transform>().position = new Vector3(attachedWand.transform.position.x, this.transform.position.y, attachedWand.transform.position.z);
-                //TO-DO add so you can rotate the shopping cart
-
+                    this.transform.parent.position = new Vector3(attachedWand.transform.position.x + cartInteractionpoint.x, this.transform.position.y, attachedWand.transform.position.z + cartInteractionpoint.z);
+                    Debug.Log("X: " + this.transform.parent.position.x + "Z: " + this.transform.parent.position.z);
+                    //Rotates cart
+                    float yRotation = attachedWand.transform.eulerAngles.y + cartInteractionRotation.y;
+                
+                this.transform.parent.eulerAngles = new Vector3(this.transform.parent.eulerAngles.x, yRotation, this.transform.parent.eulerAngles.z);
+                    
+              
 
 
 
@@ -66,10 +76,14 @@ public class InteractableItem : MonoBehaviour
     public void BeginInteraction(WandController wand)
     {
         attachedWand = wand;
+        if (this.GetComponentInParent<CartController>() != null)
+        {
+            cartInteractionpoint = this.transform.position - attachedWand.transform.position;
+            cartInteractionRotation = this.transform.eulerAngles - attachedWand.transform.eulerAngles;
+        }
         interactionPoint.position = wand.transform.position;
         interactionPoint.rotation = wand.transform.rotation;
         interactionPoint.SetParent(transform, true);
-
         currentlyInteracting = true;
     }
 
@@ -78,7 +92,7 @@ public class InteractableItem : MonoBehaviour
         if (wand == attachedWand)
         {
             
-                attachedWand = null;
+            attachedWand = null;
             currentlyInteracting = false;
         }
     }
