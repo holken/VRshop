@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
 
@@ -6,10 +7,12 @@ public class CartController : MonoBehaviour {
 	
 	Dictionary<string, Products> cart;
     public GameObject player;
+    public GameObject priceText;
     //public GameObject thisCart;
 	// Use this for initialization
 	void Start () {
 		cart = new Dictionary<string, Products>();
+        priceText.GetComponent<TextMesh>().text = "0";
         //this.transform.position = new Vector3(this.transform.position.x, 0, this.transform.position.z);
     }
     
@@ -35,15 +38,23 @@ public class CartController : MonoBehaviour {
 			temp.setQuantity(quantity);
 			temp.setPrice(price);
 			cart.Add (productId, temp);
+            
 		} else {
 			cart[productId].setQuantity(quantity);
 			cart[productId].setPrice(price);
 
 
 		}
-
-		Debug.Log("the price: " + calculatePrice ());
+        this.setPriceText();
+        Debug.Log("the price: " + calculatePrice ());
 	}
+
+    public void setPriceText()
+    {
+
+        double tempPrice = calculatePrice();
+        priceText.GetComponent<TextMesh>().text = tempPrice.ToString();
+    }
 
 	public void removeFromCart(string productId){
 		cart.Remove (productId);

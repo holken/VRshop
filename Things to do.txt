@@ -4,7 +4,9 @@ In unity:
 3. Make it so you can drop things in the cart so it is added to "the cart" -- DONE
 4. Create cart and make it stay in front of user -- DONE (You move it around, not in front of user because really annoying)
 5. Extra easter eggs
-6. Make display that shows how much the total cost (on the cart? And add all products there too?)
+6. Make display that shows how much the total cost --Done 3D text that shows on cart and updates from cost (ugly display, only a box, have to be changed and maybe add more stuff? Got a usable 3D shader now at least too for 3D text)
+-6.1. Make a nicer display
+-6.2. Add more details etc? Change size? Quality of life etc.
 7. Eventually, add some sort of thing for payment?
 8. Find and create a way to remove things from the cart
 

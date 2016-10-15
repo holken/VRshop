@@ -121,6 +121,7 @@
     <Compile Include="assets\Vive-Teleporter\Scripts\ViveNavMeshEditor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\Shaders\3DTextOneSided.shader" />
     <None Include="assets\SteamVR\Resources\SteamVR_AlphaOut.shader" />
     <None Include="assets\SteamVR\Resources\SteamVR_ClearAll.shader" />
     <None Include="assets\SteamVR\Resources\SteamVR_ColorOut.shader" />
