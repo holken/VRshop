@@ -4,10 +4,12 @@ using System.Collections;
 public class ProductSpawning : MonoBehaviour {
     public GameObject product;
     private GameObject currentProduct;
+    public WandController wand;
 	// Use this for initialization
 	void Start () {
         currentProduct = Instantiate(product);
         currentProduct.transform.position = this.transform.position;
+        currentProduct.GetComponent<ProductController>().wand = this.wand;
     }
 	
 	// Update is called once per frame
@@ -16,6 +18,7 @@ public class ProductSpawning : MonoBehaviour {
         {
             currentProduct = Instantiate(product);
             currentProduct.transform.position = this.transform.position;
+            currentProduct.GetComponent<ProductController>().setWand(this.wand);
         }
 	}
 }

@@ -13,6 +13,8 @@ public class ProductController : MonoBehaviour {
 	public double price;
 	public GameObject player;
 	public CartController cart;
+    public WandController wand;
+    public ARController AR;
 
 	// Use this for initialization
 	void Start () {
@@ -27,7 +29,7 @@ public class ProductController : MonoBehaviour {
 	void OnMouseOver() {
 		if (Input.GetMouseButtonDown (0) && Vector3.Distance (transform.position, player.transform.position) <= 3) {
 
-			cart.addToCart (product_id, quantity, price);
+			cart.addToCart (product_id, quantity, price, this.gameObject);
 			int quant = cart.getQuantity(product_id);
 			Debug.Log ("Number of items of " + product_id + " in cart: " + quant);
 			
@@ -63,6 +65,11 @@ public class ProductController : MonoBehaviour {
     {
         return price;
     }
+
+    public void setWand(WandController wand)
+    {
+        this.wand = wand;
+    }
 //	IEnumerator addToCart(){
 //		UnityWebRequest www = UnityWebRequest.Get ("http://fiskeapp.se/produkt-kategori/orter-bar-och-froer/?add-to-cart=472");
 //
@@ -93,5 +100,15 @@ public class ProductController : MonoBehaviour {
 			Debug.Log("WWW Error: " + www.error);
 		}
 	}
+
+    void OnTriggerStay()
+    {
+        if (wand.getTriggerDown())
+        {
+            wand.grabbedARObj();
+            AR.makeThrowable(this.gameObject);
+            
+        }
+    }
 }
 	

@@ -5,11 +5,14 @@ public class Products : MonoBehaviour {
 	string product_id;
 	int quantity;
 	double price;
+    GameObject obj;
+
 
 	void start(){
 		quantity = 0;
 		price = 0;
 	}
+
 
 	public void setProductId(string product_id){
 		this.product_id = product_id;
@@ -31,4 +34,19 @@ public class Products : MonoBehaviour {
 		return price;
 	}
 
+    public void setObj(GameObject obj)
+    {
+        this.obj = obj;
+
+    }
+
+    public string getID()
+    {
+        return product_id;
+    }
+
+    public GameObject getObj()
+    {
+        return obj;
+    }
 }

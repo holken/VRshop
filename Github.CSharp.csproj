@@ -63,6 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="assets\ARController.cs" />
+    <Compile Include="assets\ARSpot.cs" />
     <Compile Include="assets\InteractableCart.cs" />
     <Compile Include="assets\ProductSpawning.cs" />
     <Compile Include="assets\Scripts\CartController.cs" />

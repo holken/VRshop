@@ -29,14 +29,15 @@ public class CartController : MonoBehaviour {
         
         */
     }
-	
-	public void addToCart(string productId, int quantity, double price){
+
+    public void addToCart(string productId, int quantity, double price, GameObject obj){
 		
 		if (!cart.ContainsKey(productId)) {
 			Products temp = new Products ();
 			temp.setProductId(productId);
 			temp.setQuantity(quantity);
 			temp.setPrice(price);
+            temp.setObj(obj);
 			cart.Add (productId, temp);
             
 		} else {
@@ -59,6 +60,20 @@ public class CartController : MonoBehaviour {
 	public void removeFromCart(string productId){
 		cart.Remove (productId);
 	}
+
+    public bool removeQuantityFromCart(string productId, int quant)
+    {
+        if (cart.ContainsKey(productId))
+        {
+            if (cart[productId].getQuantity() - 1 <= 0)
+            {
+                cart[productId].setQuantity(-quant);
+                return true;
+            }
+            cart[productId].setQuantity(-quant);
+        }
+        return false;
+    }
 
 	public int getQuantity(string productId){
 		return cart [productId].getQuantity ();
@@ -83,7 +98,7 @@ public class CartController : MonoBehaviour {
             if (collider.GetComponent<InteractableItem>().IsInteracting() == false)
             {
                 ProductController product = collider.GetComponent<ProductController>();
-                addToCart(product.getProductID(), product.getQuantity(), product.getPrice());
+                addToCart(product.getProductID(), product.getQuantity(), product.getPrice(), product.gameObject);
                 Destroy(collider.gameObject);
             }
         }

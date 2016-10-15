@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class WandController : MonoBehaviour {
 	
 	private Valve.VR.EVRButtonId gripButton = Valve.VR.EVRButtonId.k_EButton_Grip;
-
+    private Valve.VR.EVRButtonId menuButton = Valve.VR.EVRButtonId.k_EButton_ApplicationMenu;
 	private Valve.VR.EVRButtonId triggerButton = Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger;
 
 
@@ -15,6 +15,10 @@ public class WandController : MonoBehaviour {
 	HashSet<InteractableItem> objectsHoveringOver = new HashSet<InteractableItem>();
 	private InteractableItem closestItem;
 	private InteractableItem interactingItem;
+    private bool triggerDown;
+    private bool ARobjGrabbed;
+
+    public ARController AR;
 
 
 	// Use this for initialization
@@ -30,9 +34,19 @@ public class WandController : MonoBehaviour {
 		}
 
 
-
-       
-        if (controller.GetPressDown (gripButton)) {
+       if (controller.GetPressDown(triggerButton)){
+            triggerDown = true;
+        }
+        if (controller.GetPressUp(triggerButton))
+        {
+            triggerDown = false;
+        }
+        if (controller.GetPressDown(menuButton))
+        {
+            Debug.Log("menu button pressed");
+            AR.toggleAR();
+        }
+        if (controller.GetPressDown (triggerButton)) {
             Debug.Log("inside getpressed");
             float minDistance = float.MaxValue;
 			float distance;
@@ -66,12 +80,23 @@ public class WandController : MonoBehaviour {
 
 
 		}
-		if (controller.GetPressUp(gripButton) && interactingItem != null) {
+		if (controller.GetPressUp(triggerButton) && interactingItem != null) {
 
 			interactingItem.EndInteraction (this);
+            ARobjGrabbed = false;
 
 		}
 	}
+
+    public void grabbedARObj()
+    {
+        ARobjGrabbed = true;
+    }
+    
+    public bool getTriggerDown()
+    {
+        return triggerDown;
+    }
 
 	private void OnTriggerEnter(Collider collider){
 		InteractableItem collidedItem = collider.GetComponent<InteractableItem> ();
