@@ -63,15 +63,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="assets\ARController.cs" />
-    <Compile Include="assets\ARSpot.cs" />
-    <Compile Include="assets\InteractableCart.cs" />
-    <Compile Include="assets\ProductSpawning.cs" />
+    <Compile Include="assets\Scripts\ARController.cs" />
+    <Compile Include="assets\Scripts\ARSpot.cs" />
     <Compile Include="assets\Scripts\CartController.cs" />
     <Compile Include="assets\Scripts\Checkout.cs" />
+    <Compile Include="assets\Scripts\InteractableCart.cs" />
     <Compile Include="assets\Scripts\InteractableItem.cs" />
+    <Compile Include="assets\Scripts\ItemIDtoName.cs" />
     <Compile Include="assets\Scripts\PlayerController.cs" />
     <Compile Include="assets\Scripts\ProductController.cs" />
+    <Compile Include="assets\Scripts\ProductSpawning.cs" />
     <Compile Include="assets\Scripts\Products.cs" />
     <Compile Include="assets\Scripts\WandController.cs" />
     <Compile Include="assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />

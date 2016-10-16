@@ -11,10 +11,11 @@ public class ProductController : MonoBehaviour {
 	public string product_id;
 	public int quantity;
 	public double price;
-	public GameObject player;
-	public CartController cart;
+	//public GameObject player;
+	//public CartController cart;
     public WandController wand;
     public ARController AR;
+    public string objName;
 
 	// Use this for initialization
 	void Start () {
@@ -25,9 +26,10 @@ public class ProductController : MonoBehaviour {
 	void Update () {
 
 	}
-
+    /*
 	void OnMouseOver() {
-		if (Input.GetMouseButtonDown (0) && Vector3.Distance (transform.position, player.transform.position) <= 3) {
+
+        if (Input.GetMouseButtonDown (0) && Vector3.Distance (transform.position, player.transform.position) <= 3) {
 
 			cart.addToCart (product_id, quantity, price, this.gameObject);
 			int quant = cart.getQuantity(product_id);
@@ -35,7 +37,7 @@ public class ProductController : MonoBehaviour {
 			
 
 			//obsolete
-			/*Debug.Log ("productID: " + product_id +" has been pressed");
+			Debug.Log ("productID: " + product_id +" has been pressed");
 			//cart.addToCart (public_sku, product_id, quantity);
 			string newURL = url + "?add-to-cart=%" +product_id + "%";
 			//WWW request = new WWW("http://fiskeapp.se/produkt-kategori/orter-bar-och-froer/?add-to-cart=472");
@@ -43,13 +45,13 @@ public class ProductController : MonoBehaviour {
 			form.AddField ("quantity", 1);
 			form.AddField ("add-to-cart", 472);
 			//StartCoroutine (WaitForRequest (www));
-			//addToCart ();*/
+			//addToCart ();
 		} else if (Input.GetMouseButtonDown (1) && Vector3.Distance (transform.position, player.transform.position) <= 3) {
 			cart.removeFromCart (product_id);
 			Debug.Log ("Item removed");
 		}
 	}
-
+    */
     public string getProductID()
     {
         return product_id;
@@ -69,6 +71,11 @@ public class ProductController : MonoBehaviour {
     public void setWand(WandController wand)
     {
         this.wand = wand;
+    }
+
+    public string getARCopy()
+    {
+        return objName;
     }
 //	IEnumerator addToCart(){
 //		UnityWebRequest www = UnityWebRequest.Get ("http://fiskeapp.se/produkt-kategori/orter-bar-och-froer/?add-to-cart=472");
@@ -101,14 +108,6 @@ public class ProductController : MonoBehaviour {
 		}
 	}
 
-    void OnTriggerStay()
-    {
-        if (wand.getTriggerDown())
-        {
-            wand.grabbedARObj();
-            AR.makeThrowable(this.gameObject);
-            
-        }
-    }
+    
 }
 	

@@ -8,6 +8,7 @@ public class CartController : MonoBehaviour {
 	Dictionary<string, Products> cart;
     public GameObject player;
     public GameObject priceText;
+    public GameObject utilities;
     //public GameObject thisCart;
 	// Use this for initialization
 	void Start () {
@@ -38,6 +39,7 @@ public class CartController : MonoBehaviour {
 			temp.setQuantity(quantity);
 			temp.setPrice(price);
             temp.setObj(obj);
+            temp.setName(utilities.GetComponent<ItemIDtoName>().getName(productId));
 			cart.Add (productId, temp);
             
 		} else {

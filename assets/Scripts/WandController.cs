@@ -36,10 +36,12 @@ public class WandController : MonoBehaviour {
 
        if (controller.GetPressDown(triggerButton)){
             triggerDown = true;
+            Debug.Log("Trigger down is: " + triggerDown);
         }
         if (controller.GetPressUp(triggerButton))
         {
             triggerDown = false;
+            Debug.Log("Trigger down is: " + triggerDown);
         }
         if (controller.GetPressDown(menuButton))
         {
@@ -47,19 +49,20 @@ public class WandController : MonoBehaviour {
             AR.toggleAR();
         }
         if (controller.GetPressDown (triggerButton)) {
-            Debug.Log("inside getpressed");
+            
             float minDistance = float.MaxValue;
 			float distance;
+            
 			foreach (InteractableItem item in objectsHoveringOver) {
-                Debug.Log("inside loop");
+                
                 if (item == null)
                 {
-                    Debug.Log("item is null");
+                    
                     objectsHoveringOver.Remove(item);
                 }
                 else {
                     distance = (item.transform.position - transform.position).sqrMagnitude;
-                    Debug.Log("Inside where you set closestItem");
+                    
                     if (distance < minDistance)
                     {
                         minDistance = distance;
@@ -74,7 +77,7 @@ public class WandController : MonoBehaviour {
                     Debug.Log("Is interacting");
 					interactingItem.EndInteraction (this);
 				}
-                Debug.Log("Right before begin interaction");
+                
                 interactingItem.BeginInteraction (this);
 			}
 
@@ -100,9 +103,9 @@ public class WandController : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider collider){
 		InteractableItem collidedItem = collider.GetComponent<InteractableItem> ();
-        Debug.Log("trigger enter");
+        
         if (collidedItem) {
-            Debug.Log("adds to things that can be collided");
+            
             objectsHoveringOver.Add (collidedItem);
 		}
         
@@ -111,7 +114,7 @@ public class WandController : MonoBehaviour {
 	private void OnTriggerExit(Collider collider){
 		InteractableItem collidedItem = collider.GetComponent<InteractableItem> ();
 		if (collidedItem) {
-            Debug.Log("exited");
+            
             objectsHoveringOver.Remove(collidedItem);
 		}
 	}

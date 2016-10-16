@@ -36,7 +36,7 @@ public class InteractableItem : MonoBehaviour
     {
         if (attachedWand && currentlyInteracting)
         {
-            Debug.Log("Something was pressed");
+          
             if (this.GetComponentInParent<CartController>() != null)
             {
                
@@ -56,7 +56,6 @@ public class InteractableItem : MonoBehaviour
 
             }
             else {
-                Debug.Log("We pressed something else");
                 posDelta = attachedWand.transform.position - interactionPoint.position;
                 this.rigidbody.velocity = posDelta * velocityFactor * Time.fixedDeltaTime;
 
@@ -100,6 +99,22 @@ public class InteractableItem : MonoBehaviour
     public bool IsInteracting()
     {
         return currentlyInteracting;
+    }
+
+    void OnTriggerStay()
+    {
+        if (IsInteracting())
+        {
+            if (attachedWand.getTriggerDown())
+            {
+                
+                attachedWand.grabbedARObj();
+                this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                this.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                this.gameObject.transform.parent = null;
+
+            }
+        }
     }
 }
  
