@@ -61,7 +61,9 @@ public class CartController : MonoBehaviour {
 
 	public void removeFromCart(string productId){
 		cart.Remove (productId);
-	}
+        setPriceText();
+
+    }
 
     public bool removeQuantityFromCart(string productId, int quant)
     {
@@ -70,9 +72,11 @@ public class CartController : MonoBehaviour {
             if (cart[productId].getQuantity() - 1 <= 0)
             {
                 cart[productId].setQuantity(-quant);
+                removeFromCart(productId);
                 return true;
             }
             cart[productId].setQuantity(-quant);
+            setPriceText();
         }
         return false;
     }

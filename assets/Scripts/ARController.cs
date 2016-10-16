@@ -5,13 +5,15 @@ using System.Collections.Generic;
 public class ARController : MonoBehaviour {
     public CartController cartController;
     private bool active;
-    private Products[] listOfItems;
+    //private Products[] listOfItems;
+    private List<Products> listOfItems;
     private int indexAll;
     private int activeObjects;
     private int numbersOfItems;
     public WandController wand;
-    //private GameObject[] objectsOnDisplay;
-    private ARSpot[] objectsOnDisplay;
+    
+    //private ARSpot[] objectsOnDisplay;
+    private List<ARSpot> objectsOnDisplay;
 
     public float objDistance = 0.8f;
     
@@ -20,12 +22,13 @@ public class ARController : MonoBehaviour {
     void Start () {
         indexAll = 0;
         activeObjects = 0;
-        objectsOnDisplay = new ARSpot[3];
+        //objectsOnDisplay = new ARSpot[3];
+        objectsOnDisplay = new List<ARSpot>();
     }
 
     private bool checkActiveIndex()
     {
-        return listOfItems.Length > indexAll;
+        return listOfItems.Count < indexAll;
     }
 
     private void resetActiveIndex()
@@ -43,12 +46,12 @@ public class ARController : MonoBehaviour {
         if (active)
         {
             //this is to check for if someone have thrown the box away, if then, remove quantity and if it have reached 0 quantity, replace it with a new one
-            int index = 0;
+            //int index = 0;
             foreach (ARSpot item in objectsOnDisplay)
             {
-                Debug.Log("index: " + index);
+                //Debug.Log("index: " + index);
                 
-                if (item != null)
+                if (!object.ReferenceEquals(null, item))
                 {
                     //checks if the position of object is far enough away
                     if (Vector3.Distance(item.getObj().transform.position, this.transform.position) >= 2.0f)
@@ -64,18 +67,39 @@ public class ARController : MonoBehaviour {
 
                             }
                             Destroy(item.getObj());
-                            objectsOnDisplay[index] = null;
+                            //objectsOnDisplay[index] = null;
+                            objectsOnDisplay.Remove(item);
+                            
+                            
                             activeObjects--;
                             numbersOfItems--;
 
 
+                        } else
+                        {
+                            item.getObj().transform.position = this.transform.position + this.transform.forward.normalized * objDistance;
+                            
+                            int index = objectsOnDisplay.IndexOf(item);
+                            item.getObj().GetComponent<Rigidbody>().isKinematic = true;
+                            
+                            item.getObj().GetComponent<BoxCollider>().isTrigger = true;
+                            if (index == 0)
+                            {
+                                item.getObj().transform.RotateAround(this.transform.position, Vector3.up, 30);
+                            } else if (index == 1)
+                            {
+                                item.getObj().transform.RotateAround(this.transform.position, Vector3.up, 0);
+                            } else if (index == 2)
+                            {
+                                item.getObj().transform.RotateAround(this.transform.position, Vector3.up, -30);
+                            }
                         }
                     }
                 }
-                index++;
+                //index++;
             }
             //creates new object if needed
-            while (activeObjects < 3 && listOfItems.Length > activeObjects)
+            while (activeObjects < 3 && listOfItems.Count > activeObjects)
             {
                 
                 ARSpot spot = new ARSpot();
@@ -83,7 +107,7 @@ public class ARController : MonoBehaviour {
                 GameObject temp = Instantiate(listOfItems[indexAll].getObj());
                 for (int i = 0; i <= 2; i++)
                 {
-                    if (objectsOnDisplay[i] == null)
+                    if(!object.ReferenceEquals(null, objectsOnDisplay[i]))
                     {
                         temp.GetComponent<Rigidbody>().isKinematic = true;
                         //REMEMBER: add a check for what kind of collider in the future, or always use mesh?
@@ -91,7 +115,8 @@ public class ARController : MonoBehaviour {
                         temp.transform.position = this.transform.position + new Vector3(Mathf.Cos(Mathf.PI / 4), 0, Mathf.Sin(Mathf.PI / 4));
                         spot.setObj(temp);
                         spot.setProd(listOfItems[indexAll]);
-                        objectsOnDisplay[i] = spot;
+                        //objectsOnDisplay[i] = spot;
+                        objectsOnDisplay.Add(spot);
                     }
                 }
                 /*if (indexActive >= 3)
@@ -108,13 +133,15 @@ public class ARController : MonoBehaviour {
     {
 
         Dictionary<string, Products> cart = cartController.getCart();
-        listOfItems = new Products[cart.Count];
+        //listOfItems = new Products[cart.Count];
+        listOfItems = new List<Products>();
+        objectsOnDisplay = new List<ARSpot>();
         int count = 0;
         int count2 = 0;
         numbersOfItems = 0;
         foreach (KeyValuePair<string, Products> item in cart)
         {
-            listOfItems[count] = item.Value;
+            listOfItems.Add(item.Value);
             count++;
             numbersOfItems++;
 
@@ -172,7 +199,8 @@ public class ARController : MonoBehaviour {
             }
             spot.setObj(temp);
             spot.setProd(listOfItems[indexAll]);
-            objectsOnDisplay[count2] = spot;
+            //objectsOnDisplay[count2] = spot;
+            objectsOnDisplay.Add(spot);
             activeObjects++;
             indexAll++;
             count2++;
@@ -185,18 +213,21 @@ public class ARController : MonoBehaviour {
      
         if (active)
         {
-            
+            /*
             for (int i = 0; i < activeObjects; i++)
             {
                 
                 Destroy(objectsOnDisplay[i].getObj());
                 
-            }
+            }*/
+            objectsOnDisplay.Clear();
+            objectsOnDisplay = null;
             active = false;
             indexAll = 0;
             activeObjects = 0;
-            objectsOnDisplay = new ARSpot[3];
-            
+            //objectsOnDisplay = new ARSpot[3];
+
+            listOfItems.Clear();
             listOfItems = null;
         } else
         {
