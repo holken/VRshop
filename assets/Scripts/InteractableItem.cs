@@ -105,9 +105,9 @@ public class InteractableItem : MonoBehaviour
     {
         if (IsInteracting())
         {
-            if (attachedWand.getTriggerDown())
+            if (attachedWand.getTriggerDown() && this.GetComponent<BoxCollider>().isTrigger == true)
             {
-                
+                Debug.Log("jaha");
                 attachedWand.grabbedARObj();
                 this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 this.gameObject.GetComponent<BoxCollider>().isTrigger = false;

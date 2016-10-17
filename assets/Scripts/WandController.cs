@@ -7,6 +7,7 @@ public class WandController : MonoBehaviour {
 	private Valve.VR.EVRButtonId gripButton = Valve.VR.EVRButtonId.k_EButton_Grip;
     private Valve.VR.EVRButtonId menuButton = Valve.VR.EVRButtonId.k_EButton_ApplicationMenu;
 	private Valve.VR.EVRButtonId triggerButton = Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger;
+    //private Valve.VR.EVRButtonId thumbPlate = Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad;
 
 
 	private SteamVR_Controller.Device controller { get { return SteamVR_Controller.Input ((int)trackedObj.index); } }
@@ -24,6 +25,7 @@ public class WandController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		trackedObj = GetComponent<SteamVR_TrackedObject> ();
+        ARobjGrabbed = false;
 	}
 	
 	// Update is called once per frame
@@ -85,10 +87,34 @@ public class WandController : MonoBehaviour {
 		}
 		if (controller.GetPressUp(triggerButton) && interactingItem != null) {
 
+            if (ARobjGrabbed)
+            {
+                Debug.Log(ARobjGrabbed);
+                interactingItem.GetComponent<BoxCollider>().isTrigger = true;
+                ARobjGrabbed = false;
+            }
 			interactingItem.EndInteraction (this);
-            ARobjGrabbed = false;
+            
 
 		}
+
+
+        if (controller.GetPressDown(gripButton) )
+        {
+            if (AR.getActiveStatus())
+            {
+                Debug.Log("fuck lol: " + this);
+                AR.setWand(this);
+                AR.gripButtonPressed(true);
+            }
+        }
+
+        if (controller.GetPressUp(gripButton))
+        {
+            AR.gripButtonPressed(false);
+        }
+
+        
 	}
 
     public void grabbedARObj()

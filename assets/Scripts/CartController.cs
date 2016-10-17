@@ -101,7 +101,7 @@ public class CartController : MonoBehaviour {
     {
         if (collider != null && collider.gameObject.GetComponent<ProductController>() != null)
         {
-            if (collider.GetComponent<InteractableItem>().IsInteracting() == false)
+            if (collider.GetComponent<InteractableItem>().IsInteracting() == false && collider.GetComponent<Collider>().isTrigger == false)
             {
                 ProductController product = collider.GetComponent<ProductController>();
                 addToCart(product.getProductID(), product.getQuantity(), product.getPrice(), product.gameObject);
