@@ -7,7 +7,7 @@ In unity:
 6. Make display that shows how much the total cost --Done 3D text that shows on cart and updates from cost (ugly display, only a box, have to be changed and maybe add more stuff? Got a usable 3D shader now at least too for 3D text)
 --6.1. Make a nicer display
 --6.2. Add more details etc? Change size? Quality of life etc.
-7. Eventually, add some sort of thing for payment?
+7. Eventually, add some sort of thing for payment? -- FKING DONE/future improvement?
 8. Find and create a way to remove things from the cart
 
 extra stuff:
@@ -15,12 +15,14 @@ extra stuff:
 2. Do some fancy optimization algorithm for the cart to fit more?
 3. A machine or something you can place products in to show more descriptions? Or Augmented reality thingy when you pick up?
 
-
+--
 PHP *Go as far as you can down the line*
 1. Put everything in cart
 2. Put in payment method and delivery stuff
 3. Draw points/money
 4. Make payment
+Pretty much done as far as we can!
+--Done
 
 Design
 1. Find old report and send to Daniel -- DONE
