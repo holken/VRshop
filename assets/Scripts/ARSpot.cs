@@ -5,6 +5,7 @@ public class ARSpot : MonoBehaviour {
     GameObject obj;
     Products prod;
     int index;
+    GameObject text;
 	// Use this for initialization
 	void Start () {
 	
@@ -14,6 +15,26 @@ public class ARSpot : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void assignTextObj(GameObject text)
+    {
+        this.text = text;
+    }
+
+    public GameObject returnTextObj()
+    {
+        return text;
+    }
+
+    public void setText(string text)
+    {
+        this.text.GetComponent<TextMesh>().text = text;
+    }
+
+    public string getText()
+    {
+        return text.GetComponent<TextMesh>().text;
+    }
 
     public void setIndex(int index)
     {

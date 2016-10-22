@@ -38,16 +38,16 @@ public class WandController : MonoBehaviour {
 
        if (controller.GetPressDown(triggerButton)){
             triggerDown = true;
-            Debug.Log("Trigger down is: " + triggerDown);
+            
         }
         if (controller.GetPressUp(triggerButton))
         {
             triggerDown = false;
-            Debug.Log("Trigger down is: " + triggerDown);
+            
         }
         if (controller.GetPressDown(menuButton))
         {
-            Debug.Log("menu button pressed");
+            
             AR.toggleAR();
         }
         if (controller.GetPressDown (triggerButton)) {
@@ -76,7 +76,7 @@ public class WandController : MonoBehaviour {
 
 			if (interactingItem) {
 				if (interactingItem.IsInteracting ()) {
-                    Debug.Log("Is interacting");
+                    
 					interactingItem.EndInteraction (this);
 				}
                 
@@ -89,7 +89,7 @@ public class WandController : MonoBehaviour {
 
             if (ARobjGrabbed)
             {
-                Debug.Log(ARobjGrabbed);
+                
                 interactingItem.GetComponent<BoxCollider>().isTrigger = true;
                 ARobjGrabbed = false;
             }
@@ -103,7 +103,7 @@ public class WandController : MonoBehaviour {
         {
             if (AR.getActiveStatus())
             {
-                Debug.Log("fuck lol: " + this);
+                
                 AR.setWand(this);
                 AR.gripButtonPressed(true);
             }

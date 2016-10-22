@@ -44,7 +44,7 @@ public class InteractableItem : MonoBehaviour
                     
                 //TO-DO add smoother movement by dragging from interactionPoint
                     this.transform.parent.position = new Vector3(attachedWand.transform.position.x + cartInteractionpoint.x, this.transform.position.y, attachedWand.transform.position.z + cartInteractionpoint.z);
-                    Debug.Log("X: " + this.transform.parent.position.x + "Z: " + this.transform.parent.position.z);
+                    //Debug.Log("X: " + this.transform.parent.position.x + "Z: " + this.transform.parent.position.z);
                     //Rotates cart
                     float yRotation = attachedWand.transform.eulerAngles.y + cartInteractionRotation.y;
                 
@@ -105,7 +105,7 @@ public class InteractableItem : MonoBehaviour
     {
         if (IsInteracting())
         {
-            if (attachedWand.getTriggerDown() && this.GetComponent<BoxCollider>().isTrigger == true)
+            if (attachedWand.getTriggerDown() && this.GetComponent<Collider>().isTrigger == true)
             {
                 Debug.Log("jaha");
                 attachedWand.grabbedARObj();

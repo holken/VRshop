@@ -11,6 +11,8 @@ public class ItemIDtoName : MonoBehaviour {
         productsInSystem = new Dictionary<string, string>();
         productsInSystem.Add("22", "Product1");
         productsInSystem.Add("2", "Product2");
+        productsInSystem.Add("3", "Product3");
+        productsInSystem.Add("4", "Product4");
 
     }
 

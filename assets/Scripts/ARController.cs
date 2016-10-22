@@ -69,9 +69,9 @@ public class ARController : MonoBehaviour {
     {
         foreach (ARSpot item in objectsOnDisplay)
         {
-            Debug.Log("starts");
-            Debug.Log("index: " + item.getIndex());
-            Debug.Log("name: " + item.getProd().getName());
+            //Debug.Log("starts");
+            //Debug.Log("index: " + item.getIndex());
+            //Debug.Log("name: " + item.getProd().getName());
         }
     }
 	// Update is called once per frame
@@ -89,44 +89,51 @@ public class ARController : MonoBehaviour {
                     //{
                     if (Vector3.Distance(wand.transform.position, this.transform.right) > Vector3.Distance(interactionPoint.transform.position, this.transform.right))
                     {
-                        itemRot[count] += distance * rotationSpeed;
+                        itemRot[i] += distance * rotationSpeed;
                     }
                     else
                     {
-                        itemRot[count] -= distance * rotationSpeed;
+                        itemRot[i] -= distance * rotationSpeed;
                     }
 
-                objectsOnDisplay[i].getObj().transform.position = this.transform.position + this.transform.forward.normalized * objDistance;
-                objectsOnDisplay[i].getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[count]);
+                    objectsOnDisplay[i].getObj().transform.position = this.transform.position + this.transform.forward.normalized * objDistance;
+                    objectsOnDisplay[i].getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[i]);
 
 
-                if (itemRot[count] > 30)
-                {
-                    Debug.Log("before destrying anus: " + objectsOnDisplay);
-                    printOutShit();
-                    itemRot[count] = -30;
-                    Debug.Log("Item to be destroyed: " + objectsOnDisplay[i].getProd().getName());
-                    Destroy(objectsOnDisplay[i].getObj());
-                    listOfItems.Add(objectsOnDisplay[i].getProd());
-                    objectsOnDisplay.RemoveAt(i);
-
-
-                    
-                    Debug.Log("after destrying anus: " + objectsOnDisplay);
-                    printOutShit();
-                }
-                else if (itemRot[count] < -30)
-                {
-                        Debug.Log("before destrying anus: " + objectsOnDisplay);
+                    if (itemRot[i] > 30)
+                    {
+                        //Debug.Log("before destrying anus: " + objectsOnDisplay);
                         printOutShit();
-                        itemRot[count] = 30;
-                        Debug.Log("Item to be destroyed: " + objectsOnDisplay[i].getProd().getName());
+                        float diff = Mathf.Abs(itemRot[i] - 30);
+                        itemRot[i] = -60+diff;
+                        //Debug.Log("Item to be destroyed: " + objectsOnDisplay[i].getProd().getName());
                         Destroy(objectsOnDisplay[i].getObj());
+                        Destroy(objectsOnDisplay[i].returnTextObj());
                         listOfItems.Add(objectsOnDisplay[i].getProd());
                         objectsOnDisplay.RemoveAt(i);
-                }
+                        Debug.Log("Removing at index: " + i);
+                        activeObjects--;
+
+
+                        //Debug.Log("after destrying anus: " + objectsOnDisplay);
+                        printOutShit();
+                    }
+                    else if (itemRot[i] < -30)
+                    {
+                            //Debug.Log("before destrying anus: " + objectsOnDisplay);
+                            printOutShit();
+                            float diff = Mathf.Abs(itemRot[i] + 30);
+                            itemRot[i] = 60-diff;
+                            //Debug.Log("Item to be destroyed: " + objectsOnDisplay[i].getProd().getName());
+                            Destroy(objectsOnDisplay[i].getObj());
+                        Destroy(objectsOnDisplay[i].returnTextObj());
+                        listOfItems.Add(objectsOnDisplay[i].getProd());
+                            objectsOnDisplay.RemoveAt(i);
+                        Debug.Log("Removing at index: " + i);
+                        activeObjects--;
+                    }
                 //}
-            }
+                }
                 
             }
             //this is to check for if someone have thrown the box away, if then, remove quantity and if it have reached 0 quantity, replace it with a new one
@@ -134,21 +141,24 @@ public class ARController : MonoBehaviour {
             //Debug.Log("before whore shit");
             //Debug.Log("whore shit: " + objectsOnDisplay);
             //printOutShit();
-            foreach (ARSpot item in objectsOnDisplay)
+
+            //foreach (ARSpot item in objectsOnDisplay)
+            for (int i = objectsOnDisplay.Count - 1; i >= 0; i--)
             {
+                
                 
                 //Debug.Log("index: " + index);
                 
-                if (!object.ReferenceEquals(null, item))
+                if (!object.ReferenceEquals(null, objectsOnDisplay[i]))
                 {
                     //checks if the position of object is far enough away
-                    if (Vector3.Distance(item.getObj().transform.position, this.transform.position) >= 2.0f)
+                    if (Vector3.Distance(objectsOnDisplay[i].getObj().transform.position, this.transform.position) >= 2.0f)
                     {
                         //Debug.Log("I was in here");
 
 
                         //checks if we have removed all objects
-                        if (cartController.removeQuantityFromCart(item.getProd().getID(), -1))
+                        if (cartController.removeQuantityFromCart(objectsOnDisplay[i].getProd().getID(), -1))
                         {
                             //checks if there is any higher active objects in the indexActive list, otherwise we have to reset it
                             if (checkActiveIndex())
@@ -156,10 +166,11 @@ public class ARController : MonoBehaviour {
                                 resetActiveIndex();
 
                             }
-                            Destroy(item.getObj());
+                            Destroy(objectsOnDisplay[i].getObj());
+                            Destroy(objectsOnDisplay[i].returnTextObj());
                             //objectsOnDisplay[index] = null;
-                            objectsOnDisplay.Remove(item);
-
+                            objectsOnDisplay.RemoveAt(i);
+                            
                             
                             activeObjects--;
                             numbersOfItems--;
@@ -167,21 +178,22 @@ public class ARController : MonoBehaviour {
 
                         } else
                         {
-                            item.getObj().transform.position = this.transform.position + this.transform.forward.normalized * objDistance;
+                            objectsOnDisplay[i].setText("Quantity: " + objectsOnDisplay[i].getProd().getQuantity()); 
+                            objectsOnDisplay[i].getObj().transform.position = this.transform.position + this.transform.forward.normalized * objDistance;
                             
-                            int index = objectsOnDisplay.IndexOf(item);
-                            item.getObj().GetComponent<Rigidbody>().isKinematic = true;
-                            
-                            item.getObj().GetComponent<BoxCollider>().isTrigger = true;
+                                int index = objectsOnDisplay.IndexOf(objectsOnDisplay[i]);
+                                objectsOnDisplay[i].getObj().GetComponent<Rigidbody>().isKinematic = true;
+
+                                objectsOnDisplay[i].getObj().GetComponent<BoxCollider>().isTrigger = true;
                             if (index == 0)
                             {
-                                item.getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[0]);
+                                    objectsOnDisplay[i].getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[0]);
                             } else if (index == 1)
                             {
-                                item.getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[1]);
+                                    objectsOnDisplay[i].getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[1]);
                             } else if (index == 2)
                             {
-                                item.getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[2]);
+                                    objectsOnDisplay[i].getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[2]);
                             }
 
                             
@@ -190,6 +202,7 @@ public class ARController : MonoBehaviour {
                 }
                 //index++;
             }
+
             //creates new object if needed
             while (activeObjects < 3 && listOfItems.Count > 0)
             {
@@ -197,6 +210,12 @@ public class ARController : MonoBehaviour {
                 ARSpot spot = new ARSpot();
                 resetActiveIndex();
                 GameObject temp = (GameObject)Instantiate(Resources.Load(listOfItems[0].getName()));
+                GameObject text = (GameObject)Instantiate(Resources.Load("ARtext"));
+                text.GetComponent<TextMesh>().text = "Quantity: " + listOfItems[0].getQuantity();
+
+                temp.transform.parent = this.transform;
+                text.transform.parent = temp.transform;
+                text.transform.position = temp.transform.position + new Vector3(0f, 0.2f, 0f);
                 bool index0Exists = false;
                 bool index1Exists = false;
                 bool index2Exists = false;
@@ -217,30 +236,49 @@ public class ARController : MonoBehaviour {
                         index2Exists = true;
                     }
                 }
-
+                objectSettings(temp);
+                temp.transform.parent = this.transform;
+                temp.GetComponent<ProductController>().wand = this.wand;
                 temp.GetComponent<Rigidbody>().isKinematic = true;
                 //REMEMBER: add a check for what kind of collider in the future, or always use mesh?
                 temp.GetComponent<BoxCollider>().isTrigger = true;
                 //temp.transform.position = this.transform.position + new Vector3(Mathf.Cos(Mathf.PI / 4), 0, Mathf.Sin(Mathf.PI / 4));
+                spot.assignTextObj(text);
                 spot.setObj(temp);
                 spot.setProd(listOfItems[0]);
                 listOfItems.RemoveAt(0);
                 //objectsOnDisplay[i] = spot;
-                objectsOnDisplay.Add(spot);
-                if (!index0Exists) { 
+                
+                
+                if (!index0Exists) {
+                    spot.setIndex(0);
+                    objectsOnDisplay.Insert(0, spot);
                     objectsOnDisplay[0].getObj().transform.position = this.transform.position + this.transform.forward.normalized * objDistance;
                     objectsOnDisplay[0].getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[0]);
                     index0Exists = false;
+                    Debug.Log("Adding at index: " + 0);
+
+
                 } else if (!index1Exists)
                 {
+                    spot.setIndex(1);
+                    objectsOnDisplay.Insert(1, spot);
                     objectsOnDisplay[1].getObj().transform.position = this.transform.position + this.transform.forward.normalized * objDistance;
                     objectsOnDisplay[1].getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[1]);
                     index1Exists = false;
+                    Debug.Log("Adding at index: " + 1);
+
+
                 } else if (!index2Exists)
                 {
+                    spot.setIndex(2);
+                    objectsOnDisplay.Insert(2, spot);
                     objectsOnDisplay[2].getObj().transform.position = this.transform.position + this.transform.forward.normalized * objDistance;
                     objectsOnDisplay[2].getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[2]);
                     index2Exists = false;
+                    Debug.Log("Adding at index: " + 2);
+
+
                 }
             }
                 /*if (indexActive >= 3)
@@ -252,6 +290,15 @@ public class ARController : MonoBehaviour {
         }
 	
 	}
+
+    private void objectSettings(GameObject temp)
+    {
+        Color oldColor = temp.GetComponent<Renderer>().material.color;
+        Color newColor = new Color(oldColor.r, oldColor.g, oldColor.b, 0.5f);
+        temp.GetComponent<Renderer>().material.color = newColor;
+        Vector3 newSize = temp.transform.localScale.normalized;
+        temp.transform.localScale = new Vector3(newSize.x * 0.2f, newSize.y * 0.2f, newSize.z * 0.2f);
+    }
 
     private void startAR()
     {
@@ -279,18 +326,20 @@ public class ARController : MonoBehaviour {
             string objName = listOfItems[0].getName();
             
             GameObject temp = (GameObject)Instantiate(Resources.Load(objName));
+            GameObject text = (GameObject)Instantiate(Resources.Load("ARtext"));
+            text.GetComponent<TextMesh>().text = "Quantity: " + listOfItems[0].getQuantity();
             temp.transform.parent = this.transform;
+            text.transform.parent = temp.transform;
+            text.transform.position = temp.transform.position + new Vector3(0f, 0.2f, 0f);
+            spot.assignTextObj(text);
             temp.GetComponent<ProductController>().wand = this.wand; 
             
             temp.GetComponent<Rigidbody>().isKinematic = true;
             //REMEMBER: add a check for what kind of collider in the future, or always use mesh?
             temp.GetComponent<BoxCollider>().isTrigger = true;
 
-            Color oldColor = temp.GetComponent<Renderer>().material.color;
-            Color newColor = new Color(oldColor.r, oldColor.g, oldColor.b, 0.5f);
-            temp.GetComponent<Renderer>().material.color = newColor;
-            Vector3 newSize = temp.transform.localScale.normalized;
-            temp.transform.localScale = new Vector3(newSize.x * 0.2f, newSize.y * 0.2f, newSize.z * 0.2f);
+            objectSettings(temp);
+        
 
             if (count2 == 0 )
             {
@@ -356,6 +405,7 @@ public class ARController : MonoBehaviour {
             foreach (ARSpot item in objectsOnDisplay)
             {
                 Destroy(item.getObj());
+                Destroy(item.returnTextObj());
             }
             objectsOnDisplay.Clear();
             objectsOnDisplay = null;

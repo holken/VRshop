@@ -19,7 +19,7 @@ public class ProductController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log ("yo");
+		
 	}
 	
 	// Update is called once per frame
