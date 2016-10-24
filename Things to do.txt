@@ -1,16 +1,10 @@
 In unity:
 1. Make shop in 3D - (done shelf and wall mesh)
-
--add texture to wall
-
 -Create a product mesh
 -add texture to product mesh
--add lamps mesh
--add lamp texture
--add lamp in unity
--bake so can teleport inside
 -make mesh for kassa
 -make texture for kassa
+-DIVIDE UP MY CURRENT MESHES AND ADD MATERIALS ON DIFFERENT PARTS INSTEAD
 optional:
 -make flower mesh and texture
 -make real door
@@ -26,15 +20,15 @@ optional:
 -hold over something and press + stay in trigger area?
 
 show price of product
-fix the ultra spinning in AR mode
-fix the blinking in AR mode
-make products spin a bit in AR mode
+
 
 
 extra stuff:
 1. Make the products stay in the cart by making them stuck in the cart
 2. Do some fancy optimization algorithm for the cart to fit more?
 3. A machine or something you can place products in to show more descriptions? Or Augmented reality thingy when you pick up?
+make products spin a bit in AR mode
+
 
 PHP:
 to be continued
@@ -51,11 +45,20 @@ in unity:
 -add texture to shelf
 -Create box mesh
 -add texture to box mesh
+-add texture to wall
+-add lamps mesh
+-add lamp texture
+-add lamp in unity
+-bake so can teleport inside
+
 
 2. Make it so you can lift things with vive -- DONE
 3. Make it so you can drop things in the cart so it is added to "the cart" -- DONE
 4. Create cart and make it stay in front of user -- DONE (You move it around, not in front of user because really annoying)
 8. Find and create a way to remove things from the cart - done
+
+fix the ultra spinning in AR mode
+fix the blinking in AR mode
 
 Design
 1. Find old report and send to Daniel -- DONE
@@ -67,3 +70,24 @@ PHP *Go as far as you can down the line*
 4. Make payment
 Pretty much done as far as we can!
 --Done
+
+possibly models to use (or buy whats needed in future):
+for shelfs
+https://www.assetstore.unity3d.com/en/#!/content/646
+or
+https://www.assetstore.unity3d.com/#!/content/13002 (making a box)
+
+for glass
+http://gamedev.stackexchange.com/questions/98557/glass-material-for-unity-5
+https://www.assetstore.unity3d.com/#!/content/38603 GLAS IN LAMP
+
+for door and lamp
+https://www.assetstore.unity3d.com/#!/search/page=1/sortby=popularity/query=category:64
+
+walls, floor and roof:
+https://www.assetstore.unity3d.com/#!/content/44128
+https://www.assetstore.unity3d.com/#!/content/67798
+
+outside environment:
+https://www.assetstore.unity3d.com/#!/content/13001
+https://www.assetstore.unity3d.com/#!/content/12964

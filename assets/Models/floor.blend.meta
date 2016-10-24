@@ -1,42 +1,15 @@
 fileFormatVersion: 2
-guid: 7d086199281e0b04ca71949949a07ad4
-timeCreated: 1477251608
+guid: f084dd84ee6f4034a8a864eddd7f57ec
+timeCreated: 1477320187
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: BottomShelf
-    100002: Cube
-    100004: Floor
-    100006: Roof
-    100008: //RootNode
-    100010: TopShelf
-    100012: Walls
-    400000: BottomShelf
-    400002: Cube
-    400004: Floor
-    400006: Roof
-    400008: //RootNode
-    400010: TopShelf
-    400012: Walls
-    2300000: BottomShelf
-    2300002: Cube
-    2300004: Floor
-    2300006: Roof
-    2300008: TopShelf
-    2300010: Walls
-    3300000: BottomShelf
-    3300002: Cube
-    3300004: Floor
-    3300006: Roof
-    3300008: TopShelf
-    3300010: Walls
-    4300000: Cube
-    4300002: Roof
-    4300004: Walls
-    4300006: Floor
-    4300008: BottomShelf
-    4300010: TopShelf
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Floor
     7400000: Default Take
     9500000: //RootNode
   materials:

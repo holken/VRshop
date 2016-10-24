@@ -74,8 +74,14 @@ public class ARController : MonoBehaviour {
             //Debug.Log("name: " + item.getProd().getName());
         }
     }
-	// Update is called once per frame
-	void Update () {
+
+    void objectRotation(Transform subject, float speedOfRotation)
+    {
+        subject.Rotate(Vector3.up * speedOfRotation, Time.deltaTime);
+    }
+
+    // Update is called once per frame
+    void Update () {
         
         if (active)
         {
@@ -89,15 +95,17 @@ public class ARController : MonoBehaviour {
                     //{
                     if (Vector3.Distance(wand.transform.position, this.transform.right) > Vector3.Distance(interactionPoint.transform.position, this.transform.right))
                     {
-                        itemRot[i] += distance * rotationSpeed;
+                        itemRot[i] -= distance * rotationSpeed;
                     }
                     else
                     {
-                        itemRot[i] -= distance * rotationSpeed;
+                        itemRot[i] += distance * rotationSpeed;
                     }
 
                     objectsOnDisplay[i].getObj().transform.position = this.transform.position + this.transform.forward.normalized * objDistance;
+                    Quaternion oldRot = objectsOnDisplay[i].getObj().transform.rotation;
                     objectsOnDisplay[i].getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[i]);
+                    objectsOnDisplay[i].getObj().transform.rotation = oldRot;
 
 
                     if (itemRot[i] > 30)
@@ -105,7 +113,7 @@ public class ARController : MonoBehaviour {
                         //Debug.Log("before destrying anus: " + objectsOnDisplay);
                         printOutShit();
                         float diff = Mathf.Abs(itemRot[i] - 30);
-                        itemRot[i] = -60+diff;
+                        itemRot[i] = -30+diff;
                         //Debug.Log("Item to be destroyed: " + objectsOnDisplay[i].getProd().getName());
                         Destroy(objectsOnDisplay[i].getObj());
                         Destroy(objectsOnDisplay[i].returnTextObj());
@@ -123,7 +131,7 @@ public class ARController : MonoBehaviour {
                             //Debug.Log("before destrying anus: " + objectsOnDisplay);
                             printOutShit();
                             float diff = Mathf.Abs(itemRot[i] + 30);
-                            itemRot[i] = 60-diff;
+                            itemRot[i] = 30-diff;
                             //Debug.Log("Item to be destroyed: " + objectsOnDisplay[i].getProd().getName());
                             Destroy(objectsOnDisplay[i].getObj());
                         Destroy(objectsOnDisplay[i].returnTextObj());
@@ -151,6 +159,7 @@ public class ARController : MonoBehaviour {
                 
                 if (!object.ReferenceEquals(null, objectsOnDisplay[i]))
                 {
+                    //objectRotation(objectsOnDisplay[i].getObj().transform, 0.5f);
                     //checks if the position of object is far enough away
                     if (Vector3.Distance(objectsOnDisplay[i].getObj().transform.position, this.transform.position) >= 2.0f)
                     {
