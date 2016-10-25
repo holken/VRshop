@@ -19,9 +19,8 @@ optional:
 -add a real kassa
 -hold over something and press + stay in trigger area?
 
-show price of product
 
-
+quick fix to price of product (take sqrt of x and y to get the distance that will work from all view angels)(<2min fix)
 
 extra stuff:
 1. Make the products stay in the cart by making them stuck in the cart
@@ -59,6 +58,8 @@ in unity:
 
 fix the ultra spinning in AR mode
 fix the blinking in AR mode
+show price of product
+
 
 Design
 1. Find old report and send to Daniel -- DONE
