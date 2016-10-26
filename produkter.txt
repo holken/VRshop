@@ -1,0 +1,74 @@
+20cbd
+id: 22
+namn: CBD OLJA 20 ML, 400MG CBD
+pris: 332
+
+50cbd
+id: 144
+namn: CBD OLJA 50 ML, 1000MG CBD
+pris: 830
+
+cbdcaps250
+id: 4720
+namn: CBD KAPSLAR, 250 ST, 1000 MG CBD
+pris: 799
+
+cbdcaps60
+id: 3847
+namn: CBD KAPSLAR, 60 ST, 240 MG CBD
+pris: 199
+
+cbd20cit
+id: 3827
+namn: CBD OLJA CITRUS 20 ML, 400MG CBD
+pris: 342
+
+cbd50cit
+id: 3822
+namn: CBD OLJA CITRUS 50 ML, 1000MG CBD
+pris: 845
+
+cbd20mynt
+id: 3829
+namn: CBD OLJA MYNTA 20 ML, 400MG CBD
+pris: 342
+
+cbd50mynt
+id: 3824
+namn: CBD OLJA MYNTA 50 ML, 1000MG CBD
+pris: 845
+
+goldenhemp250
+id: 5150
+namn: GOLDEN HEMP, 250 KAPSLAR
+pris: 395
+
+goldenhemp60
+id: 5137
+namn: GOLDEN HEMP, 60 KAPSLAR
+pris: 95
+
+cbddog
+id: 27
+namn: CBD OLJA TILL HUND, 50 ML, 500MG CBD
+pris: 415
+
+cbdcat
+id:7770
+namn: CBD OLJA TILL KATT 20 ML, 200MG CBD
+pris: 166
+
+hampafröolja
+id:
+namn: EKOLOGISK HAMPFRÖOLJA, SVENSKODLAD, 250 ML
+
+hampafröoljanypress
+id:7606
+namn: FÄRSKPRESSAD EKOLOGISK HAMPFRÖOLJA, SVENSKODLAD, 250 ML
+pris: 139
+
+mynta 538 255-590
+citrus 558 255-590
+goldenhemp 508 95-395
+cbdcapslar 504 199-799
+cbdolja 399 245-570

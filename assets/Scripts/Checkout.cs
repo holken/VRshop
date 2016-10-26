@@ -6,9 +6,14 @@ public class Checkout : MonoBehaviour {
 	public CartController cart;
 	public GameObject player;
 	// Use this for initialization
-	void Start () {
-		
+	void Update () {
+        this.transform.Rotate(0*Time.deltaTime, 0* Time.deltaTime, 40 * Time.deltaTime);
 	}
+
+    void Start()
+    {
+        
+    }
 
 	private void makePurchase(){
 		
@@ -22,8 +27,8 @@ public class Checkout : MonoBehaviour {
 		}
 		urlAddition = urlAddition.Remove (urlAddition.Length - 1);
         //to be url for script sending some sort of custom URL?
-        Debug.Log("URL : " + "https://scandinavianhemp.se/" + urlAddition);
-		Application.OpenURL("https://scandinavianhemp.se/" + urlAddition);
+        Debug.Log("URL : " + "http://fiskeapp.se/wp-content/plugins/wc_vr/WC-VR2.php/" + urlAddition);
+		Application.OpenURL("http://fiskeapp.se/wp-content/plugins/wc_vr/WC-VR2.php/" + urlAddition);
 	}
 
 	void OnMouseOver() {
@@ -36,7 +41,8 @@ public class Checkout : MonoBehaviour {
     private void OnTriggerEnter(Collider collider)
     {
         Debug.Log("entered trigger");
-        makePurchase();
+        if (collider.gameObject.GetComponent<WandController>() != null)
+            makePurchase();
 
     }
 }

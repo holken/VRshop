@@ -10,7 +10,7 @@ public class ItemIDtoName : MonoBehaviour {
     {
         productsInSystem = new Dictionary<string, string>();
         productsInSystem.Add("22", "Product1");
-        productsInSystem.Add("2", "cubeonly");
+        productsInSystem.Add("2", "cbd20");
         productsInSystem.Add("3", "Product3");
         productsInSystem.Add("4", "Product4");
 

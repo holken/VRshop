@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
+using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -67,10 +70,10 @@ public class ARController : MonoBehaviour {
 
     public void printOutShit()
     {
-        foreach (ARSpot item in objectsOnDisplay)
+        foreach (Products item in listOfItems)
         {
-            //Debug.Log("starts");
-            //Debug.Log("index: " + item.getIndex());
+            Debug.Log("starts");
+            Debug.Log("id: " + item.getName());
             //Debug.Log("name: " + item.getProd().getName());
         }
     }
@@ -106,39 +109,44 @@ public class ARController : MonoBehaviour {
                     Quaternion oldRot = objectsOnDisplay[i].getObj().transform.rotation;
                     objectsOnDisplay[i].getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[i]);
                     objectsOnDisplay[i].getObj().transform.rotation = oldRot;
-
-
+                    objectsOnDisplay[i].returnTextObj().transform.LookAt(this.transform);
+                    Vector3 diffVec = objectsOnDisplay[i].returnTextObj().transform.position - this.transform.position;
+                    diffVec.Normalize();
+                    objectsOnDisplay[i].returnTextObj().transform.position = objectsOnDisplay[i].getObj().transform.position - new Vector3(diffVec.x * objectsOnDisplay[i].getObj().transform.lossyScale.x, diffVec.y * objectsOnDisplay[i].getObj().transform.lossyScale.y, diffVec.z * objectsOnDisplay[i].getObj().transform.lossyScale.z);
+                    objectsOnDisplay[i].returnTextObj().transform.Rotate(0f, 180f, 0f);
                     if (itemRot[i] > 30)
                     {
                         //Debug.Log("before destrying anus: " + objectsOnDisplay);
                         printOutShit();
                         float diff = Mathf.Abs(itemRot[i] - 30);
-                        itemRot[i] = -30+diff;
+                        itemRot[i] = -30 + diff;
+
                         //Debug.Log("Item to be destroyed: " + objectsOnDisplay[i].getProd().getName());
+                        listOfItems.Add(objectsOnDisplay[i].getProd());
                         Destroy(objectsOnDisplay[i].getObj());
                         Destroy(objectsOnDisplay[i].returnTextObj());
-                        listOfItems.Add(objectsOnDisplay[i].getProd());
                         objectsOnDisplay.RemoveAt(i);
-                        Debug.Log("Removing at index: " + i);
                         activeObjects--;
 
 
                         //Debug.Log("after destrying anus: " + objectsOnDisplay);
                         printOutShit();
+
                     }
                     else if (itemRot[i] < -30)
                     {
                             //Debug.Log("before destrying anus: " + objectsOnDisplay);
-                            printOutShit();
+
                             float diff = Mathf.Abs(itemRot[i] + 30);
-                            itemRot[i] = 30-diff;
+                            itemRot[i] = 30 - diff;
                             //Debug.Log("Item to be destroyed: " + objectsOnDisplay[i].getProd().getName());
                             Destroy(objectsOnDisplay[i].getObj());
-                        Destroy(objectsOnDisplay[i].returnTextObj());
                         listOfItems.Add(objectsOnDisplay[i].getProd());
+                        Destroy(objectsOnDisplay[i].returnTextObj());
+                        
                             objectsOnDisplay.RemoveAt(i);
-                        Debug.Log("Removing at index: " + i);
                         activeObjects--;
+                        printOutShit();
                     }
                 //}
                 }
@@ -167,7 +175,7 @@ public class ARController : MonoBehaviour {
 
 
                         //checks if we have removed all objects
-                        if (cartController.removeQuantityFromCart(objectsOnDisplay[i].getProd().getID(), -1))
+                        if (cartController.removeQuantityFromCart(objectsOnDisplay[i].getProd().getID(), 1))
                         {
                             //checks if there is any higher active objects in the indexActive list, otherwise we have to reset it
                             if (checkActiveIndex())
@@ -189,18 +197,21 @@ public class ARController : MonoBehaviour {
                         {
                             objectsOnDisplay[i].setText("Quantity: " + objectsOnDisplay[i].getProd().getQuantity()); 
                             objectsOnDisplay[i].getObj().transform.position = this.transform.position + this.transform.forward.normalized * objDistance;
-                            
-                                int index = objectsOnDisplay.IndexOf(objectsOnDisplay[i]);
-                                objectsOnDisplay[i].getObj().GetComponent<Rigidbody>().isKinematic = true;
+                            objectsOnDisplay[i].getObj().transform.parent = this.transform;
+                            objectsOnDisplay[i].getObj().transform.rotation = new Quaternion(0f,0f,0f, 0f);
 
-                                objectsOnDisplay[i].getObj().GetComponent<BoxCollider>().isTrigger = true;
-                            if (index == 0)
+
+                           int index = objectsOnDisplay.IndexOf(objectsOnDisplay[i]);
+                           objectsOnDisplay[i].getObj().GetComponent<Rigidbody>().isKinematic = true;
+
+                           objectsOnDisplay[i].getObj().GetComponent<BoxCollider>().isTrigger = true;
+                            if (i == 0)
                             {
                                     objectsOnDisplay[i].getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[0]);
-                            } else if (index == 1)
+                            } else if (i == 1)
                             {
                                     objectsOnDisplay[i].getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[1]);
-                            } else if (index == 2)
+                            } else if (i == 2)
                             {
                                     objectsOnDisplay[i].getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[2]);
                             }
@@ -213,7 +224,7 @@ public class ARController : MonoBehaviour {
             }
 
             //creates new object if needed
-            while (activeObjects < 3 && listOfItems.Count > 0)
+            while (objectsOnDisplay.Count < 3 && listOfItems.Count > 0)
             {
 
                 ARSpot spot = new ARSpot();
@@ -224,7 +235,9 @@ public class ARController : MonoBehaviour {
 
                 temp.transform.parent = this.transform;
                 text.transform.parent = temp.transform;
-                text.transform.position = temp.transform.position + new Vector3(0f, 0.2f, 0f);
+               
+                
+
                 bool index0Exists = false;
                 bool index1Exists = false;
                 bool index2Exists = false;
@@ -257,8 +270,8 @@ public class ARController : MonoBehaviour {
                 spot.setProd(listOfItems[0]);
                 listOfItems.RemoveAt(0);
                 //objectsOnDisplay[i] = spot;
-                
-                
+               
+
                 if (!index0Exists) {
                     spot.setIndex(0);
                     objectsOnDisplay.Insert(0, spot);
@@ -289,6 +302,11 @@ public class ARController : MonoBehaviour {
 
 
                 }
+                Vector3 diff = text.transform.position - this.transform.position;
+                diff.Normalize();
+                objectsOnDisplay[0].returnTextObj().transform.LookAt(this.transform);
+                text.transform.position = temp.transform.position - new Vector3(diff.x * temp.transform.lossyScale.x, diff.y * temp.transform.lossyScale.y, diff.z * temp.transform.lossyScale.z);
+                objectsOnDisplay[0].returnTextObj().transform.Rotate(0f, 180f, 0f);
             }
                 /*if (indexActive >= 3)
                 {
@@ -366,8 +384,8 @@ public class ARController : MonoBehaviour {
                  //Debug.Log("degrees: " + degree2);
                  //temp.transform.position = this.transform.position + new Vector3(Mathf.Cos(degree2*Mathf.Deg2Rad), 0, Mathf.Sin(degree2 * Mathf.Deg2Rad));
                  //temp.transform.position = this.transform.position + this.transform.forward - new Vector3(this.transform.right.x*0.8f, 0, this.transform.right.z*0.8f);*/
-                itemRot1 = 30;
-                itemRot[0] = 30;
+                itemRot1 = 20;
+                itemRot[0] = 20;
                 temp.transform.position = this.transform.position + this.transform.forward.normalized * objDistance;
                 temp.transform.RotateAround(this.transform.position, Vector3.up, itemRot[0]);
                 spot.setIndex(0);
@@ -381,8 +399,8 @@ public class ARController : MonoBehaviour {
                 spot.setIndex(1);
             } else
             {
-                itemRot3 = -30;
-                itemRot[2] = -30;
+                itemRot3 = -20;
+                itemRot[2] = -20;
                 temp.transform.position = this.transform.position + this.transform.forward.normalized * objDistance;
                 temp.transform.RotateAround(this.transform.position, Vector3.up, itemRot[2]);
                 spot.setIndex(2);
@@ -391,7 +409,13 @@ public class ARController : MonoBehaviour {
             spot.setProd(listOfItems[0]);
             listOfItems.RemoveAt(0);
             //objectsOnDisplay[count2] = spot;
+           
             objectsOnDisplay.Add(spot);
+            objectsOnDisplay[count2].returnTextObj().transform.LookAt(this.transform);
+            Vector3 diffVec = objectsOnDisplay[count2].returnTextObj().transform.position - this.transform.position;
+            diffVec.Normalize();
+            objectsOnDisplay[count2].returnTextObj().transform.position = objectsOnDisplay[count2].getObj().transform.position - new Vector3(diffVec.x * objectsOnDisplay[count2].getObj().transform.lossyScale.x, diffVec.y * objectsOnDisplay[count2].getObj().transform.lossyScale.y, diffVec.z * objectsOnDisplay[count2].getObj().transform.lossyScale.z);
+            objectsOnDisplay[count2].returnTextObj().transform.Rotate(0f, 180f, 0f);
             activeObjects++;
             indexAll++;
             count2++;
