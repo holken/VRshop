@@ -73,6 +73,7 @@
     <Compile Include="assets\Scripts\ItemIDtoName.cs" />
     <Compile Include="assets\Scripts\PlayerController.cs" />
     <Compile Include="assets\Scripts\ProductController.cs" />
+    <Compile Include="assets\Scripts\ProductInstantiation.cs" />
     <Compile Include="assets\Scripts\ProductSpawning.cs" />
     <Compile Include="assets\Scripts\Products.cs" />
     <Compile Include="assets\Scripts\WandController.cs" />

@@ -12,7 +12,11 @@ public class ProductSpawning : MonoBehaviour {
 	void Start () {
         currentProduct = Instantiate(product);
         currentProduct.transform.position = this.transform.position;
-        currentProduct.GetComponent<ProductController>().wand = this.wand;
+        if (product.GetComponent<ProductInstantiation>() != null && !product.GetComponent<ProductInstantiation>().isInstantiated())
+        {
+            product.GetComponent<ProductInstantiation>().instantiateProduct();
+        }
+        currentProduct.GetComponent<ProductController>().setWand(this.wand);
         player = GameObject.Find("Camera (eye)");
     }
 	
@@ -21,9 +25,16 @@ public class ProductSpawning : MonoBehaviour {
 	    if (currentProduct == null)
         {
             currentProduct = Instantiate(product);
+            
             currentProduct.transform.position = this.transform.position;
-            currentProduct.GetComponent<ProductController>().setWand(this.wand);
+            
         }
+        if (product.GetComponent<ProductInstantiation>() != null && !product.GetComponent<ProductInstantiation>().isInstantiated())
+        {
+            product.GetComponent<ProductInstantiation>().instantiateProduct();
+        }
+        currentProduct.GetComponent<ProductController>().setWand(this.wand);
+        
 
         Vector3 cubeDir = transform.position - player.transform.position;
         float angle = Vector3.Angle(cubeDir, player.transform.forward);
@@ -35,7 +46,7 @@ public class ProductSpawning : MonoBehaviour {
             
             
             
-            priceText.GetComponent<TextMesh>().text = "price: " + product.GetComponent<ProductController>().getPrice() + "\n product name: " + product.GetComponent<ProductController>().getProductID();
+            priceText.GetComponent<TextMesh>().text = "price: " + currentProduct.GetComponent<ProductController>().getPrice() + "\n product name: " + currentProduct.GetComponent<ProductController>().getProductName();
             playerFacing = true;
         }
 

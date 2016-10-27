@@ -7,7 +7,7 @@ using System.Threading;
 
 public class ProductController : MonoBehaviour {
 
-	public string public_sku;
+	public string name;
 	public string product_id;
 	public int quantity;
 	public double price;
@@ -19,11 +19,12 @@ public class ProductController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        //wand = GameObject.Find("Controller (left)").GetComponent<WandController>();
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 
 	}
     /*
@@ -55,6 +56,12 @@ public class ProductController : MonoBehaviour {
     public string getProductID()
     {
         return product_id;
+
+    }
+
+    public string getProductName()
+    {
+        return name;
 
     }
 

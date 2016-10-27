@@ -229,6 +229,7 @@ public class ARController : MonoBehaviour {
 
                 ARSpot spot = new ARSpot();
                 resetActiveIndex();
+                Debug.Log("List of itemName: " + listOfItems[0].getName());
                 GameObject temp = (GameObject)Instantiate(Resources.Load(listOfItems[0].getName()));
                 GameObject text = (GameObject)Instantiate(Resources.Load("ARtext"));
                 text.GetComponent<TextMesh>().text = "Quantity: " + listOfItems[0].getQuantity();
@@ -260,6 +261,10 @@ public class ARController : MonoBehaviour {
                 }
                 objectSettings(temp);
                 temp.transform.parent = this.transform;
+                if (temp.GetComponent<ProductInstantiation>() != null && !temp.GetComponent<ProductInstantiation>().isInstantiated())
+                {
+                    temp.GetComponent<ProductInstantiation>().instantiateProduct();
+                }
                 temp.GetComponent<ProductController>().wand = this.wand;
                 temp.GetComponent<Rigidbody>().isKinematic = true;
                 //REMEMBER: add a check for what kind of collider in the future, or always use mesh?
@@ -324,7 +329,7 @@ public class ARController : MonoBehaviour {
         Color newColor = new Color(oldColor.r, oldColor.g, oldColor.b, 0.5f);
         temp.GetComponent<Renderer>().material.color = newColor;
         Vector3 newSize = temp.transform.localScale.normalized;
-        temp.transform.localScale = new Vector3(newSize.x * 0.2f, newSize.y * 0.2f, newSize.z * 0.2f);
+        temp.transform.localScale = new Vector3(0.1f, 0.1f,0.1f);
     }
 
     private void startAR()
@@ -359,6 +364,10 @@ public class ARController : MonoBehaviour {
             text.transform.parent = temp.transform;
             text.transform.position = temp.transform.position + new Vector3(0f, 0.2f, 0f);
             spot.assignTextObj(text);
+            if (temp.GetComponent<ProductInstantiation>() != null && !temp.GetComponent<ProductInstantiation>().isInstantiated())
+            {
+                temp.GetComponent<ProductInstantiation>().instantiateProduct();
+            }
             temp.GetComponent<ProductController>().wand = this.wand; 
             
             temp.GetComponent<Rigidbody>().isKinematic = true;
