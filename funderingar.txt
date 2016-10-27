@@ -1,0 +1,11 @@
+mass upload
+
+1. Upload all meshes for themself even the cardboards, add script to add components, put them in
+neg: Can't change the components outside of runtime (can change them if we add parameters to the script though!)
+might not be that simple since we need to create the meshes outside of unity?
+pro: Might be simple who knows
+
+2. Upload only textures and decor an already made prefab (or more) and change parameters to fit new product
+neg: might not be that simple?
+pro: We don't have to create the meshes outside of unity, can just upload the textures to unity/done meshes and add parameters
+
