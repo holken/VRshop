@@ -9,26 +9,10 @@ public class CartController : MonoBehaviour {
     public GameObject player;
     public GameObject priceText;
     public GameObject utilities;
-    //public GameObject thisCart;
-	// Use this for initialization
+
 	void Start () {
 		cart = new Dictionary<string, Products>();
         priceText.GetComponent<TextMesh>().text = "0";
-        //this.transform.position = new Vector3(this.transform.position.x, 0, this.transform.position.z);
-    }
-    
-    //this is for if we want the cart to be fastklistrad in front (if you want this then remove the InteractionItem script), otherwise comment out the update (take back the script)
-    void Update()
-    {
-       
-        /*
-        LEGACY CODE, USED TO HAVE THE CART IN-FRONT OF THE PLAYER AT ALL TIMES (REALLY ANNOYING)
-        this.transform.position = new Vector3(player.transform.position.x + player.transform.forward.x, 0, player.transform.position.z + player.transform.forward.z);
-
-        float yRotation = player.transform.eulerAngles.y-90;
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, yRotation, transform.eulerAngles.z);
-        
-        */
     }
 
     public void addToCart(string productId, int quantity, double price, GameObject obj){

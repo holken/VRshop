@@ -1,0 +1,12 @@
+ARController 474 -369
+-And made stuff more modular/easier to read
+
+productcontroller 119 - 50
+
+checkout 48 - 41
+-add public variable from urlstring
+
+Cartcontroller 112 - 96
+
+ProductSpawning 106 - 74
+-changed color on text

@@ -5,6 +5,7 @@ using System.Collections;
 public class Checkout : MonoBehaviour {
 	public CartController cart;
 	public GameObject player;
+    public string url;
 	// Use this for initialization
 	void Update () {
         this.transform.Rotate(0*Time.deltaTime, 0* Time.deltaTime, 40 * Time.deltaTime);
@@ -26,16 +27,9 @@ public class Checkout : MonoBehaviour {
 			count++;
 		}
 		urlAddition = urlAddition.Remove (urlAddition.Length - 1);
-        //to be url for script sending some sort of custom URL?
-        Debug.Log("URL : " + "http://fiskeapp.se/wp-content/plugins/wc_vr/WC-VR2.php/" + urlAddition);
-		Application.OpenURL("http://fiskeapp.se/wp-content/plugins/wc_vr/WC-VR2.php/" + urlAddition);
-	}
 
-	void OnMouseOver() {
-		if (Input.GetMouseButtonDown (0) && Vector3.Distance (transform.position, player.transform.position) <= 3) {
-
-			makePurchase ();
-		}
+        Debug.Log("URL : " + url + urlAddition);
+		Application.OpenURL(url + urlAddition);
 	}
 
     private void OnTriggerEnter(Collider collider)

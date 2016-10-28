@@ -17,15 +17,14 @@ public class InteractableCart : InteractableItem {
     private WandController attachedWand;
 
     private Transform interactionPoint;
-    // Use this for initialization
+
     void Start () {
         rigidbody = GetComponent<Rigidbody>();
         interactionPoint = new GameObject().transform;
         velocityFactor /= rigidbody.mass;
         rotationFactor /= rigidbody.mass;
     }
-	
-	// Update is called once per frame
+
 	void Update () {
         if (attachedWand && currentlyInteracting)
         {

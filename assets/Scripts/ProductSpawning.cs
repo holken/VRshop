@@ -67,43 +67,8 @@ public class ProductSpawning : MonoBehaviour {
             priceText.transform.position = new Vector3(this.transform.position.x + cubeDir.normalized.x * fatness, this.transform.position.y + cubeDir.normalized.y* fatness, this.transform.position.z + cubeDir.normalized.z* fatness); 
             priceText.transform.Rotate(0f, 180f, 0f);
 
-
-            //ALT 1 fking bugging
-            //priceText.transform.position = new Vector3(this.transform.position.x + priceText.transform.forward.x, this.transform.position.y + priceText.transform.forward.y, this.transform.position.z + priceText.transform.forward.z);
-
-
-            //ALT 2 MUST CHECK THE OBJECTS ROTATION AND THEN IF FOR THIS TO WORK
-            //float fatness = product.transform.lossyScale.z;
-            //priceText.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - fatness);
-
-
         }
-
-        /*
-        RaycastHit hit;
-        Vector3 cameraCenter = player.GetComponent<Camera>().WorldToScreenPoint(new Vector3(Screen.width / 2, Screen.height / 2, player.GetComponent<Camera>().nearClipPlane));
-        if (Physics.Raycast(cameraCenter, player.transform.forward, out hit, 300))
-        {
-            Debug.Log("raycast is working");
-            GameObject objHit = hit.transform.gameObject;
-            if (objHit == this)
-            {
-                Debug.Log("objHit is working");
-                priceText = (GameObject)Instantiate(Resources.Load("PriceText"));
-                priceText.transform.position = this.transform.position;
-                priceText.GetComponent<TextMesh>().text = "price: " + product.GetComponent<ProductController>().getPrice();
-            }
-        } else
-        {
-            if (priceText != null)
-            {
-                Destroy(priceText);
-            }
-        }
-        */
 
     }
-
-
 
 }
