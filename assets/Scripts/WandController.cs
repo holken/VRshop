@@ -20,6 +20,7 @@ public class WandController : MonoBehaviour {
     private bool ARobjGrabbed;
 
     public ARController AR;
+    public CartController cart;
 
 
 	// Use this for initialization
@@ -85,7 +86,20 @@ public class WandController : MonoBehaviour {
 
 
 		}
-		if (controller.GetPressUp(triggerButton) && interactingItem != null) {
+
+        if (controller.GetPress(triggerButton) && interactingItem != null)
+        {
+            if (controller.GetPressDown(gripButton) && interactingItem.GetComponent<ProductController>() != null)
+            {
+
+                interactingItem.EndInteraction(this);
+                objectsHoveringOver.Remove(interactingItem);
+                cart.fastAddToCart(interactingItem.GetComponent<ProductController>());
+                interactingItem = null;
+            }
+        }
+
+        if (controller.GetPressUp(triggerButton) && interactingItem != null) {
 
             if (ARobjGrabbed)
             {
@@ -94,9 +108,12 @@ public class WandController : MonoBehaviour {
                 ARobjGrabbed = false;
             }
 			interactingItem.EndInteraction (this);
-            
+            objectsHoveringOver.Remove(interactingItem);
+            interactingItem = null;
 
-		}
+
+
+        }
 
 
         if (controller.GetPressDown(gripButton) )
@@ -113,6 +130,9 @@ public class WandController : MonoBehaviour {
         {
             AR.gripButtonPressed(false);
         }
+
+       
+        
 
         
 	}

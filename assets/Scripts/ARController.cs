@@ -53,6 +53,7 @@ public class ARController : MonoBehaviour {
         diffVec.Normalize();
         objectsOnDisplay[i].returnTextObj().transform.position = currObj.transform.position - new Vector3(diffVec.x * currObj.transform.lossyScale.x, diffVec.y * currObj.transform.lossyScale.y, diffVec.z * currObj.transform.lossyScale.z);
         objectsOnDisplay[i].returnTextObj().transform.Rotate(0f, 180f, 0f);
+        
     }
 
     void updateObj(GameObject currObj, int i)
@@ -61,6 +62,8 @@ public class ARController : MonoBehaviour {
         Quaternion oldRot = currObj.transform.rotation;
         currObj.transform.RotateAround(this.transform.position, Vector3.up, itemRot[i]);
         currObj.transform.rotation = oldRot;
+        currObj.transform.LookAt(this.transform);
+        currObj.transform.Rotate(-90f, 0f, 180f);
     }
 
     void addBackToListAndRemove(int i)
@@ -145,12 +148,14 @@ public class ARController : MonoBehaviour {
                             objectsOnDisplay[i].getObj().transform.position = this.transform.position + this.transform.forward.normalized * objDistance;
                             objectsOnDisplay[i].getObj().transform.parent = this.transform;
                             objectsOnDisplay[i].getObj().transform.rotation = new Quaternion(0f,0f,0f, 0f);
+                            objectsOnDisplay[i].getObj().transform.LookAt(this.transform);
+                            objectsOnDisplay[i].getObj().transform.Rotate(-90f, 0f, 180f);
 
+                            int index = objectsOnDisplay.IndexOf(objectsOnDisplay[i]);
+                            objectsOnDisplay[i].getObj().GetComponent<Rigidbody>().isKinematic = true;
 
-                           int index = objectsOnDisplay.IndexOf(objectsOnDisplay[i]);
-                           objectsOnDisplay[i].getObj().GetComponent<Rigidbody>().isKinematic = true;
-
-                           objectsOnDisplay[i].getObj().GetComponent<BoxCollider>().isTrigger = true;
+                            objectsOnDisplay[i].getObj().GetComponent<BoxCollider>().isTrigger = true;
+                            aimARText(i);
                             if (i == 0)
                             {
                                     objectsOnDisplay[i].getObj().transform.RotateAround(this.transform.position, Vector3.up, itemRot[0]);
@@ -242,7 +247,7 @@ public class ARController : MonoBehaviour {
     private void objectSettings(GameObject temp)
     {
         Color oldColor = temp.GetComponent<Renderer>().material.color;
-        Color newColor = new Color(oldColor.r, oldColor.g, oldColor.b, 0.5f);
+        Color newColor = new Color(oldColor.r, oldColor.g, oldColor.b, 0.7f);
         temp.GetComponent<Renderer>().material.color = newColor;
         Vector3 newSize = temp.transform.localScale.normalized;
         temp.transform.localScale = new Vector3(0.08f, 0.08f,0.08f);
@@ -250,7 +255,7 @@ public class ARController : MonoBehaviour {
 
     private void initializeARObj(GameObject text, GameObject temp)
     {
-        text.GetComponent<TextMesh>().text = "Quantity: " + listOfItems[0].getQuantity();
+        text.GetComponent<TextMesh>().text = listOfItems[0].getQuantity() + "st";
         temp.transform.parent = this.transform;
         text.transform.parent = temp.transform;
 
@@ -329,7 +334,8 @@ public class ARController : MonoBehaviour {
             }
             spotAssignement(spot, text, temp);
             objectsOnDisplay.Add(spot);
-
+            temp.transform.LookAt(this.transform);
+            temp.transform.Rotate(-90f, 0f, 180f);
             aimARText(count2);
             count2++;
 

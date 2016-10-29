@@ -46,7 +46,7 @@ public class ProductSpawning : MonoBehaviour {
             
             
             
-            priceText.GetComponent<TextMesh>().text = "price: " + currentProduct.GetComponent<ProductController>().getPrice() + "\n product name: " + currentProduct.GetComponent<ProductController>().getProductName();
+            priceText.GetComponent<TextMesh>().text = "price: " + currentProduct.GetComponent<ProductController>().getPrice() + "\n " + currentProduct.GetComponent<ProductController>().getProductName();
             playerFacing = true;
         }
 
@@ -64,7 +64,7 @@ public class ProductSpawning : MonoBehaviour {
             float fatness = product.transform.localScale.z;
             float vectorScaled = fatness / vectorSum;
             
-            priceText.transform.position = new Vector3(this.transform.position.x + cubeDir.normalized.x * fatness, this.transform.position.y + cubeDir.normalized.y* fatness, this.transform.position.z + cubeDir.normalized.z* fatness); 
+            priceText.transform.position = new Vector3(this.transform.position.x + cubeDir.normalized.x * fatness, this.transform.position.y + product.transform.localScale.y, this.transform.position.z + cubeDir.normalized.z* fatness); 
             priceText.transform.Rotate(0f, 180f, 0f);
 
         }

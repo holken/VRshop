@@ -16,7 +16,8 @@ public class CartController : MonoBehaviour {
     }
 
     public void addToCart(string productId, int quantity, double price, GameObject obj){
-		
+
+        Debug.Log("adding to cart: " + quantity);
 		if (!cart.ContainsKey(productId)) {
 			Products temp = new Products ();
 			temp.setProductId(productId);
@@ -90,6 +91,18 @@ public class CartController : MonoBehaviour {
                 ProductController product = collider.GetComponent<ProductController>();
                 addToCart(product.getProductID(), product.getQuantity(), product.getPrice(), product.gameObject);
                 Destroy(collider.gameObject);
+            }
+        }
+    }
+
+    public void fastAddToCart(ProductController product)
+    {
+        if (product.gameObject.GetComponent<ProductController>() != null)
+        {
+            if (product.GetComponent<Collider>().isTrigger == false)
+            {
+                addToCart(product.getProductID(), product.getQuantity(), product.getPrice(), product.gameObject);
+                Destroy(product.gameObject);
             }
         }
     }
