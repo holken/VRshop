@@ -21,9 +21,20 @@ public class ProductController : MonoBehaviour {
 
     }
 
+    public void setProductID(string product_id)
+    {
+        this.product_id = product_id;
+
+    }
+
     public string getProductName()
     {
         return name;
+
+    }
+    public void setProductName(string name)
+    {
+        this.name = name;
 
     }
 
@@ -31,10 +42,20 @@ public class ProductController : MonoBehaviour {
     {
         return quantity;
     }
+    public void setQuantity(int quantity)
+    {
+        this.quantity = quantity;
+
+    }
 
     public double getPrice()
     {
         return price;
+    }
+    public void setPrice(double price)
+    {
+        this.price = price;
+
     }
 
     public void setWand(WandController wand)

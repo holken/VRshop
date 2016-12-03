@@ -73,3 +73,5 @@ goldenhemp 508 95-395
 cbdcapslar 504 199-799
 cbdolja 399 245-570
 C-vitamin 515 129
+
+shopname uploaderusername spawnpoint(int 1,2,3...,n) prodid, prodname, proddesc, prodquantity, prodcost, productpic/fbxfile 
