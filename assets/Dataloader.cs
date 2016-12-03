@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Dataloader : MonoBehaviour {
     private string secretKey = "mySecretKey"; // Edit this value and make sure it's the same as the one stored on the server
     public string fetchURL = "http://localhost/vrshop/downloaditems.php?";
     public int nbrOfSpawnPoints;
-    public string shopName = "testshop";
+    public string shopName;
     public Material material;
     int nbrObjects = 0;
     
@@ -18,7 +19,8 @@ public class Dataloader : MonoBehaviour {
 
     IEnumerator loadFromDB()
     {
-        fetchURL = fetchURL  + "shopname=" + WWW.EscapeURL(shopName);
+        Scene scene = SceneManager.GetActiveScene();
+        fetchURL = fetchURL  + "shopname=" + WWW.EscapeURL(scene.name);
         WWW hs_get = new WWW(fetchURL);
         yield return hs_get;
         string data = hs_get.text;
