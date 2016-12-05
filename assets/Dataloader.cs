@@ -8,6 +8,7 @@ public class Dataloader : MonoBehaviour {
     public int nbrOfSpawnPoints;
     public string shopName;
     public Material material;
+    public GameObject checkout;
     int nbrObjects = 0;
     
     // Use this for initialization
@@ -33,7 +34,9 @@ public class Dataloader : MonoBehaviour {
         {
             Debug.Log(hs_get.text);
         }
-
+        string shopurl = data.Substring(0, data.IndexOf("||"));
+        data = data.Substring(data.IndexOf("||") + 2);
+        checkout.AddComponent<Checkout>().setURL(shopurl);
         //loop through data where we cut out all the variables for each item and then create an object and assign to spawnpoints
         int count = 0;
         while (data.IndexOf("||") != -1 && count < 100)

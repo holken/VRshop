@@ -27,6 +27,7 @@ public class Checkout : MonoBehaviour {
 			count++;
 		}
 		urlAddition = urlAddition.Remove (urlAddition.Length - 1);
+        urlAddition = urlAddition + "&payOpt=" + PlayerPrefs.GetString("paymentOption");
 
         Debug.Log("URL : " + url + urlAddition);
 		Application.OpenURL(url + urlAddition);
@@ -38,5 +39,10 @@ public class Checkout : MonoBehaviour {
         if (collider.gameObject.GetComponent<WandController>() != null)
             makePurchase();
 
+    }
+
+    public void setURL(string url)
+    {
+        this.url = url;
     }
 }

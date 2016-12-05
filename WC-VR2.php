@@ -11,7 +11,7 @@
 		error_reporting(E_ALL|E_STRICT);
 		//require_once(dirname(__FILE__) . '/../../../wp-load.php');
 		//?product1=472&productQ1=1&product2=556&productQ2=1
-		//http://fiskeapp.se/wp-content/plugins/wc_vr/WC-VR.php/?product1=472&productQ1=1&product2=556&productQ2=1
+		//http://fiskeapp.se/wp-content/plugins/wc_vr/WC-VR2.php/?product1=472&productQ1=1&product2=556&productQ2=1&payOpt=paypal
 		//require_once( $WebsiteRoot . '/wp-content/plugins/woocommerce/includes/class-wc-cart.php' );
 		//require_once( $WebsiteRoot . '/wp-content/themes/ktzunyporto/functions.php' );
 		//require('/the/path/to/your/wp-blog-header.php');
@@ -36,6 +36,7 @@
 			print_r($parameters);
 			$product_id = 0;
 			$order = wc_create_order();
+			$paymentOption = "";
 			foreach($parameters as $key => $value){
 				
 				if (substr($key,0,8) === "productQ"){
@@ -49,6 +50,8 @@
 					$product_id = $value;
 					print_r("first: " + $product_id);
 					
+				} elseif (substr($key,0,6) === "payOpt"){
+					$paymentOption = $value;
 				}
 			}
 			$userid = get_user_meta( $current_user->ID, 'user_login', true );
@@ -137,7 +140,7 @@
 
 			// Process Payment
 			$available_gateways = WC()->payment_gateways->get_available_payment_gateways();
-			$result = $available_gateways[ 'cheque' ]->process_payment( $order->id );
+			$result = $available_gateways[ $paymentOption ]->process_payment( $order->id );
 
 			// Redirect to success/confirmation/payment page
 			if ( $result['result'] == 'success' ) {

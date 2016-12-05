@@ -65,7 +65,10 @@
   <ItemGroup>
     <Compile Include="assets\CheckoutTrigger.cs" />
     <Compile Include="assets\Dataloader.cs" />
+    <Compile Include="assets\LevelHandler.cs" />
+    <Compile Include="assets\LevelSelected.cs" />
     <Compile Include="assets\LevelSelector.cs" />
+    <Compile Include="assets\PaymentSelector.cs" />
     <Compile Include="assets\Scripts\ARController.cs" />
     <Compile Include="assets\Scripts\ARSpot.cs" />
     <Compile Include="assets\Scripts\CartController.cs" />

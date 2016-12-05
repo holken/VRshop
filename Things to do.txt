@@ -1,7 +1,7 @@
 immediately
 [X] support for more stores (chose in menu)
 []Add support for different payments (either in 3D-world or 2D-menu)
-[]Add check for logged in
+[X]Add check for logged in
 []Add confirmation page which checks if the user details are correct, otherwise change
 
 intermitten:
