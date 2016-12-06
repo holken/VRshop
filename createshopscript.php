@@ -20,33 +20,49 @@ ini_set('display_errors', 1);
 		$paymentOptions = $_POST['payment'];
 		if(isset($_POST['shopName']) && !empty($paymentOptions)){
 			
-			//$query = "insert into usershops (username, shopname, checkouturl) values ('$username', '$_POST[shopName]', '$_POST[checkouturl]');";
-			$query = "insert into usershops (username, shopname, checkouturl) values (?, ?, ?)";
-            $stmt = $conn->prepare($query);
-			$shopname = $_POST['shopName'];
-			$stmt->bind_param("sss", $username, $shopname, $_POST['checkouturl']);
+			$query = "SELECT * FROM usershops WHERE shopname = ?";
+			$stmt = $conn->prepare($query);
+			$stmt->bind_param("s", $_POST['shopName']);
 			$stmt->execute();
+			$stmt->store_result();
+			$countRows1 = $stmt->num_rows;
 			
-			$N = count($paymentOptions);
- 
-			for($i=0; $i < $N; $i++)
-			{
-				$query = "insert into paymentoptions(storename, paymentname) values (?, ?)";
-				$stmt = $conn->prepare($query);
-				$payment = $paymentOptions[$i];
-				echo $payment;
-				$stmt->bind_param("ss", $shopname, $payment);
-				$stmt->execute();
+			$query = "SELECT * from usershops WHERE username = ?";
+			$stmt = $conn->prepare($query);
+			$stmt->bind_param("s", $username);
+			$stmt->execute();
+			$stmt->store_result();
+			$countRows2 = $stmt->num_rows;
+			
+			if ($countRows1 > 0){
+				header( "Location: createshop.php?err=1");
+			
+			} else if ($countRows2 > 0) {
+				header( "Location: createshop.php?err=2");
 			}
 			
-			//$result = mysql_query($query) or die('Query failed: ' . mysql_error()); 
-			//$Uusername = $username;
-			//$Ushopname = $_post['shopName'];
-			//$Ucheckouturl = $_post['checkouturl'];
-			//$stmt->execute();
-			
-			echo "New shop created successfully";
-			//$stmt->close();
+			else{
+				//$query = "insert into usershops (username, shopname, checkouturl) values ('$username', '$_POST[shopName]', '$_POST[checkouturl]');";
+				$query = "insert into usershops (username, shopname, checkouturl) values (?, ?, ?)";
+				$stmt = $conn->prepare($query);
+				$shopname = $_POST['shopName'];
+				$stmt->bind_param("sss", $username, $shopname, $_POST['checkouturl']);
+				$stmt->execute();
+				$N = count($paymentOptions);
+	 
+				for($i=0; $i < $N; $i++)
+				{
+					$query = "insert into paymentoptions(storename, paymentname) values (?, ?)";
+					$stmt = $conn->prepare($query);
+					$payment = $paymentOptions[$i];
+					echo $payment;
+					$stmt->bind_param("ss", $shopname, $payment);
+					$stmt->execute();
+				}
+
+				echo "New shop created successfully";
+
+			}
 		}
 	//} 
 

@@ -68,6 +68,8 @@ $page_file_temp = $_SERVER["PHP_SELF"];
 $page_directory = dirname($page_file_temp);
 
 $imglink = "http://$_SERVER[HTTP_HOST]$page_directory/".$target_file;
+$query = "DELETE FROM shopitems WHERE shopname = '$shopName' AND spawnpoint = '$spawnpoint';";
+$result = mysql_query($query) or die('Query failed: ' . mysql_error()); 
 
 $query = "insert into shopitems(shopname, uploadusername, shoptype, spawnpoint, prodid, prodname, proddesc, prodquant, prodcost, productImg) values ('$shopName', 'testuser', 'testshop1', '$spawnpoint', '$prodid', '$prodname', '$proddesc', '$prodquant', '$prodcost', '$imglink');"; 
 $result = mysql_query($query) or die('Query failed: ' . mysql_error()); 

@@ -14,7 +14,7 @@
 		
 		 $conn = new mysqli($servername, $username, $password, $dbName);
 		//$current_user = wp_get_current_user();
-		$username = "holk";
+		$username = "testuser2";
 		
 		//$checkUserID = mysql_query("SELECT * from usershops WHERE username = '$username'");
 		$query = "SELECT * from usershops WHERE username = '$username'";
