@@ -1,22 +1,23 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-	//$WebsiteRoot=$_SERVER['DOCUMENT_ROOT'];
+	$WebsiteRoot=$_SERVER['DOCUMENT_ROOT'];
 
-	//include_once($WebsiteRoot . '/wp-config.php');
+	include_once($WebsiteRoot . '/wp-config.php');
 	
-	//if (is_user_logged_in()){
+	if (is_user_logged_in()){
 		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbName = "vrshop";
+		$username = "fiskeapp";
+		$password = "D&5XQJp_{!U5";
+		$dbName = "fiskeapp_wrdp1";
 		/*$db = mysql_connect($servername, $username, $password) or die('Could not connect: ' . mysql_error()); 
 		mysql_select_db($dbName) or die('Could not select database');*/
 		
 		$conn = new mysqli($servername, $username, $password, $dbName);
 		
-		//$current_user = wp_get_current_user();
-		$username = "holky";
+		$usernameP = wp_get_current_user();
+		$username = $usernameP->ID;
+		//$username = "holky";
 		$paymentOptions = $_POST['payment'];
 		if(isset($_POST['shopName']) && !empty($paymentOptions)){
 			
@@ -64,6 +65,8 @@ ini_set('display_errors', 1);
 
 			}
 		}
-	//} 
+	} else {
+		header( "Location: createshop.php?err=3");
+	}
 
 ?>

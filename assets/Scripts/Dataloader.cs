@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Dataloader : MonoBehaviour {
     private string secretKey = "mySecretKey"; // Edit this value and make sure it's the same as the one stored on the server
-    public string fetchURL = "http://localhost/vrshop/downloaditems.php?";
+    public string fetchURL = "http://fiskeapp.se/wp-content/plugins/wc_vr/downloaditems.php?";
     public int nbrOfSpawnPoints;
     public string shopName;
     public Material material;
@@ -21,7 +21,9 @@ public class Dataloader : MonoBehaviour {
     IEnumerator loadFromDB()
     {
         Scene scene = SceneManager.GetActiveScene();
+        Debug.Log(fetchURL);
         fetchURL = fetchURL  + "shopname=" + WWW.EscapeURL(scene.name);
+        Debug.Log(fetchURL);
         WWW hs_get = new WWW(fetchURL);
         yield return hs_get;
         string data = hs_get.text;
@@ -36,7 +38,7 @@ public class Dataloader : MonoBehaviour {
         }
         string shopurl = data.Substring(0, data.IndexOf("||"));
         data = data.Substring(data.IndexOf("||") + 2);
-        checkout.AddComponent<Checkout>().setURL(shopurl);
+        checkout.GetComponent<Checkout>().setURL(shopurl);
         //loop through data where we cut out all the variables for each item and then create an object and assign to spawnpoints
         int count = 0;
         while (data.IndexOf("||") != -1 && count < 100)

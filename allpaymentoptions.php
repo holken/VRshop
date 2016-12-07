@@ -1,9 +1,9 @@
 <?php
 	//http://localhost/vrshop/allpaymentoptions.php?storeName=Dayscene
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbName = "vrshop";
+	$servername = "fiskeapp.se";
+	$username = "fiskeapp";
+	$password = "D&5XQJp_{!U5";
+	$dbName = "fiskeapp_wrdp1";
 	$conn = new mysqli($servername, $username, $password, $dbName);
 	
 	function parseQueryString(){

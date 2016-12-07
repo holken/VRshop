@@ -6,7 +6,8 @@
 <?php
 	$errors = array (
 		1 => "A store with that name already exists!",
-		2 => "You have already created a shop!"
+		2 => "You have already created a shop!",
+		3 => "You have to login to create a shop!"
 	);
 
 	$errorID = isset($_GET['err']) ? (int)$_GET['err'] : 0;
@@ -15,8 +16,10 @@
 		
 		if($_GET['err'] == 1){
 			echo "A store with that name already exists!";
-		} else if ($_GET['err']){
+		} else if ($_GET['err'] == 2){
 			echo "You have already created a shop!";
+		} else if ($_GET['err'] == 3){
+			echo "You have to login to create a shop!";
 		}
 	}
 

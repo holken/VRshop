@@ -2,20 +2,26 @@
 <h1>Your store information</h1>
 <?php
 
-	//$WebsiteRoot=$_SERVER['DOCUMENT_ROOT'];
+	if (isset($_GET['del'])){
+		echo "You have deleted item: " . $_GET['del'] . "<br>";
+	}
 
-	//include_once($WebsiteRoot . '/wp-config.php');
+	$WebsiteRoot=$_SERVER['DOCUMENT_ROOT'];
+
+	include_once($WebsiteRoot . '/wp-config.php');
 		
-	//if (is_user_logged_in()){
+	if (is_user_logged_in()){
 		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbName = "vrshop";
+		$username = "fiskeapp";
+		$password = "D&5XQJp_{!U5";
+		$dbName = "fiskeapp_wrdp1";
 		$conn = new mysqli($servername, $username, $password, $dbName);
 		
 		$stmt = $conn->prepare("SELECT shopname, checkouturl FROM usershops WHERE username = ?");
 		$stmt->bind_param("s", $current_user);
-		$current_user = "testuser";
+		//$current_user = "testuser";
+		$usernameP = wp_get_current_user();
+		$current_user = $usernameP->ID;
 		$stmt->execute();
 		$stmt->store_result();
 		$stmt->bind_result($shopname, $checkouturl);
@@ -41,7 +47,7 @@
 		$stmt = $conn->prepare("SELECT shopname, shoptype, spawnpoint, prodid, prodname, proddesc, prodquant, prodcost, productImg FROM shopitems WHERE uploadusername = ? ORDER BY spawnpoint ASC");
 		$stmt->bind_param("s", $current_user);
 		//$current_user = wp_get_current_user();
-		$current_user = "testuser";
+		//$current_user = "testuser";
 		$stmt->execute();
 		
 		$stmt->store_result();
@@ -58,10 +64,13 @@
 			echo "Shop name: $shopname <br>";
 			echo "Shop type: $shoptype <br>";
 			echo "Spawnpoint: $spawnpoint <br><br>";
-		echo "<form action=\"deleteitem.php?\" method=\"post\"> <button name=\"product\" type=\"submit\" value=\"$spawnpoint||$shopname\">Delete item</button> </form>";
+		echo "<form action=\"deleteitem.php?\" method=\"post\"> <button name=\"product\" type=\"submit\" value=\"$spawnpoint||$shopname||$prodname\">Delete item</button> </form>";
 		}
+		$stmt->close();
+	} else {
+		echo "you have to login to access your store items";
+	}
 
-$stmt->close();
 
 
 ?>

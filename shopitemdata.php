@@ -1,8 +1,8 @@
 <?php
 		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbName = "vrshop";
+		$username = "fiskeapp";
+		$password = "D&5XQJp_{!U5";
+		$dbName = "fiskeapp_wrdp1";
         $db = mysql_connect($servername, $username, $password) or die('Could not connect: ' . mysql_error()); 
         mysql_select_db($dbName) or die('Could not select database');
  

@@ -10,7 +10,8 @@ $errors = array (
 	2 => "File with the name already exists",
 	3 => "The file size is too large",
 	4 => "Sorry! We only have support for PNG, JPEG, JPG and GIF",
-	5 => "There was an error uploading your file, try again!"
+	5 => "There was an error uploading your file, try again!",
+	6 => "You have to be logged in to upload items!"
 );
 
 $errorID = isset($_GET['err']) ? (int)$_GET['err'] : 0;
@@ -25,6 +26,8 @@ if (isset($_GET['err'])){
 		echo "Sorry! We only have support for PNG, JPEG, JPG and GIF";
 	} else if ($_GET['err'] == 5){
 		echo "There was an error uploading your file, try again!";
+	} else if ($_GET['err'] == 5){
+		echo "You have to be logged in to upload items!";
 	}
 }
 

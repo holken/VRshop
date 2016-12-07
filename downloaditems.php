@@ -1,10 +1,10 @@
 <?php
     // Send variables for the MySQL database class.
     $servername = "localhost";
-	$username = "root";
-	$password = "";
+	$username = "fiskeapp";
+	$password = "D&5XQJp_{!U5";
+	$dbName = "fiskeapp_wrdp1";
 	$shopname = $_GET['shopname'];
-	$dbName = "vrshop";
     $db = mysql_connect($servername, $username, $password) or die('Could not connect: ' . mysql_error()); 
     mysql_select_db($dbName) or die('Could not select database');
 	

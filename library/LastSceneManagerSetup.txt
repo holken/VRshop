@@ -1,4 +1,4 @@
 sceneSetups:
-- path: assets/Scenes/ChoosePay.unity
+- path: assets/Scenes/dayscene.unity
   isLoaded: 1
   isActive: 1
