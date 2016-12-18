@@ -1,8 +1,7 @@
 <?php
 
 $target_dir = "Images/";
-$RandomAccountNumber = uniqid();
-$target_file = $target_dir . $RandomAccountNumber;
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
@@ -38,7 +37,7 @@ if (is_user_logged_in()){
 	}
 	// Allow certain file formats
 	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-	&& $imageFileType != "gif"  && $imageFileType != "PNG") {
+	&& $imageFileType != "gif"  && $imageFileType != "PNG" && $imageFileType != "JPG") {
 		echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
 		header ("Location: uploadItems.php?err=4");
 		$uploadOk = 0;
@@ -48,7 +47,7 @@ if (is_user_logged_in()){
 		echo "Sorry, your file was not uploaded.";
 	// if everything is ok, try to upload file
 	} else {
-		
+		$RandomAccountNumber = uniqid();
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 			echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
 		} else {
@@ -87,6 +86,6 @@ if (is_user_logged_in()){
 	}
 
 } else {
-	header( "Location: createshop.php?err=5");
+	header( "Location: uploadItems.php?err=6");
 }
 ?>

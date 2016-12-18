@@ -1,6 +1,6 @@
 <?php
 	//http://localhost/vrshop/allpaymentoptions.php?storeName=Dayscene
-	$servername = "fiskeapp.se";
+	$servername = "localhost";
 	$username = "fiskeapp";
 	$password = "D&5XQJp_{!U5";
 	$dbName = "fiskeapp_wrdp1";

@@ -14,7 +14,7 @@ public class ItemIDtoName : MonoBehaviour {
         //productsInSystem.Add("3", "Product3");
         //productsInSystem.Add("4", "Product4");
         
-        productsInSystem.Add("3827", "cbd20cit");
+        /*productsInSystem.Add("3827", "cbd20cit");
         productsInSystem.Add("3829", "cbd20mynt");
         productsInSystem.Add("144", "cbd50");
         productsInSystem.Add("3822", "cbd50cit");
@@ -26,7 +26,7 @@ public class ItemIDtoName : MonoBehaviour {
         productsInSystem.Add("5137", "goldenhemp60");
         productsInSystem.Add("5150", "goldenhemp250");
         productsInSystem.Add("7606", "hampaoljafresh");
-        productsInSystem.Add("22", "cbd20");
+        productsInSystem.Add("22", "cbd20");*/
 
     }
 
@@ -38,5 +38,10 @@ public class ItemIDtoName : MonoBehaviour {
             return name;
         }
         return "";
+    }
+
+    public void addName(string id, string name)
+    {
+        productsInSystem.Add(id, name);
     }
 }

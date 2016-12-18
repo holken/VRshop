@@ -178,6 +178,7 @@ public class ARController : MonoBehaviour {
             {
 
                 ARSpot spot = new ARSpot();
+                Debug.Log("objName: " + listOfItems[0].getName());
                 GameObject temp = (GameObject)Instantiate(Resources.Load(listOfItems[0].getName()));
                 GameObject text = (GameObject)Instantiate(Resources.Load("ARtext"));
 
@@ -305,6 +306,7 @@ public class ARController : MonoBehaviour {
             string objName = listOfItems[0].getName();
 
             ARSpot spot = new ARSpot();
+            Debug.Log("objName: " + objName);
             GameObject temp = (GameObject)Instantiate(Resources.Load(objName));
             GameObject text = (GameObject)Instantiate(Resources.Load("ARtext"));
             initializeARObj(text, temp);

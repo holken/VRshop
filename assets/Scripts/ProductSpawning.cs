@@ -41,7 +41,7 @@ public class ProductSpawning : MonoBehaviour {
 
         if (angle < 30 && Vector3.Distance(transform.position, player.transform.position) <= 1 && playerFacing != true)
         {
-            Debug.Log("I'm facing the player");
+            //Debug.Log("I'm facing the player");
             priceText = (GameObject)Instantiate(Resources.Load("PriceText"));
             
             
@@ -52,7 +52,7 @@ public class ProductSpawning : MonoBehaviour {
 
         if ((angle > 30 || Vector3.Distance(transform.position, player.transform.position) > 1) && playerFacing == true)
         {
-            Debug.Log("I'm facing the player not anymore");
+            //Debug.Log("I'm facing the player not anymore");
             Destroy(priceText);
             playerFacing = false;
         }

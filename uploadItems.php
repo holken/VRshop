@@ -26,7 +26,7 @@ if (isset($_GET['err'])){
 		echo "Sorry! We only have support for PNG, JPEG, JPG and GIF";
 	} else if ($_GET['err'] == 5){
 		echo "There was an error uploading your file, try again!";
-	} else if ($_GET['err'] == 5){
+	} else if ($_GET['err'] == 6){
 		echo "You have to be logged in to upload items!";
 	}
 }

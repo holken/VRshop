@@ -93,28 +93,35 @@ public class Dataloader : MonoBehaviour {
         WWW www = new WWW(url);
         yield return www;
         www.LoadImageIntoTexture(texture);
-        Material tempMaterial = new Material(material);
-        tempMaterial.SetTexture("_MainTex", texture);
+        Material tempMaterial = new Material(Shader.Find("Standard"));
+        tempMaterial.CopyPropertiesFromMaterial(material);
         tempMaterial.EnableKeyword("_NORMALMAP");
         tempMaterial.EnableKeyword("_DETAIL_MULX2");
+        tempMaterial.SetTexture("_MainTex", texture);
+        
+        tempMaterial.mainTexture = texture;
+
 
         int point = int.Parse(spawnPoint);
         point--;
         GameObject spawner;
-        if (point == 0)
+        if (point == 1)
         {
             spawner = GameObject.Find("ProductSpawner");
         } else
         {
-            spawner = GameObject.Find("ProductSpawner (" + spawnPoint + ")");
+            point = point - 1;
+            spawner = GameObject.Find("ProductSpawner (" + point + ")");
         }
         //GameObject spawner = GameObject.Find("ProductSpawner (" + spawnPoint + ")");
         Debug.Log(spawner);
 
         GameObject product = spawner.GetComponent<ProductSpawning>().product;
         Debug.Log(product.GetComponent<ProductController>().getProductName());
-        product.GetComponent<Renderer>().sharedMaterial.mainTexture = texture;
+        product.GetComponent<Renderer>().sharedMaterials[1].mainTexture = texture;
         product.GetComponent<ProductController>().setProductName(prodName);
+        string fish = product.transform.name;
+        this.GetComponent<ItemIDtoName>().addName(product.GetComponent<ProductController>().getProductID(), fish);
         product.GetComponent<ProductController>().setProductID(prodId);
         product.GetComponent<ProductController>().setQuantity(int.Parse(prodquant));
         product.GetComponent<ProductController>().setPrice(double.Parse(prodcost));
